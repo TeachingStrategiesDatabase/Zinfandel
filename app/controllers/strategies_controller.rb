@@ -1,10 +1,6 @@
 class StrategiesController < ApplicationController
 
-	def show
-        
-        @strategy = Strategy.find(params[:id])
 
-	end
 	
 	def new
 
@@ -20,9 +16,16 @@ class StrategiesController < ApplicationController
     
     private
     def strategy_params
-        params.require(:strategy).permit(:title, :text, :body, :tech, :source)
+        params.require(:strategy).permit(:id, :title, :text, :body, :tech, :source)
 
 	end
+    
+    
+    def show
+        
+        @strategy = Strategy.find(params[:id])
+        
+    end
 
 	def update
 
