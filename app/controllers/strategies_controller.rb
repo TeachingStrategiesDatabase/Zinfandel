@@ -10,21 +10,18 @@ class StrategiesController < ApplicationController
 
 	def create
         
-        @strategy = Strategy.new(params[:strategy])
-            
-        @strategy.save
-        redirect_to @strategy
+    
     end
         
         
     def show
             
-            
+            @strategy= Strategy.find(params[:id])
             
     end
         
 	def update
-        
+        @strategies=Strategy.all
         
 	end
 
