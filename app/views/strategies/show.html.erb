@@ -1,21 +1,15 @@
 <!-- Specific strategy page -->
 
-<p>
-<strong>Title:</strong>
-<%= @strategy.title %>
-</p>
+<table>
+<tr>
+<th>Title</th>
+<th>Body</th>
+</tr>
 
-<p>
-<strong>Body:</strong>
-<%= @strategy.body %>
-</p>
-
-<p>
-<strong>Tech:</strong>
-<%= @strategy.tech %>
-</p>
-
-<p>
-<strong>Source:</strong>
-<%= @strategy.source %>
-</p>
+<% @strategies.each do |strategy| %>
+<tr>
+<td><%= strategy.title %></td>
+<td><%= strategy.body %></td>
+</tr>
+<% end %>
+</table>
