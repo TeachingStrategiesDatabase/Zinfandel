@@ -1,16 +1,21 @@
 <!-- Search result page - list results of search -->
 
 
-<% @currentPage.each do |stg| %>
+<% @currentPage.each do |strategy| %>
 	<p></p>
 	<% title = "Title: " %>
-	<% title += stg.title %>
-	<%= link_to title, {:controller => "strategies" , :action => "show" ,:id =>stg.id}  %>
+	<% title += strategy.title %>
+	<%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %>
 
 
+	<%= strategy.body %>
+	<%= strategy.tech %>
+	<%= strategy.source %>
+	<%= link_to "Update", :controller => 'strategies', :action =>'update', id: strategy.id %>
+	<%= link_to "Destroy", strategy_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
 
-	<%= label_tag(:kwd, stg.keywords )  %>
-	<%= label_tag(:sid, stg.id )  %>
+	<%= label_tag(:kwd, strategy.keywords )  %>
+	<%= label_tag(:sid, strategy.id )  %>
 <%end%>
 
 <p></p>

@@ -3,7 +3,7 @@ class StrategiesController < ApplicationController
 	before_filter :logged_in, :only => [:new, :create, :update, :destroy]
 
 	def show
-		@AStrategy = Strategy.find_by_id(params[:id])
+		@AStrategy = Strategy.find(params[:id])
 	end
 	
 	def search
@@ -27,6 +27,11 @@ class StrategiesController < ApplicationController
 	def new
 		@strategy = Strategy.new
 	end
+    
+  def index
+      
+  end
+    
 
 	def create
 		@user = current_user
@@ -43,11 +48,16 @@ class StrategiesController < ApplicationController
 	end
 
 	def update
-
+        #redirect_to :action => 'update'
+        #@strategy= Strategy.find(params[:id])
+        
 	end
 
 	def destroy
-
+        
+        @strategy = Strategy.find(params[:id])
+        @strategy.destroy
+        redirect_to :action => 'show'
 	end
 
 	private

@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   get 'new' => 'strategies#new'
   get 'home' => 'example#home'
   post 'create' => 'strategies#create'
+
+  # default_url_options :host => "localhost:3000"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+  resources :strategies
   # You can have the root of your site routed with "root"
+
   root 'static#homepage'
 
   # Login mapping
@@ -17,10 +21,9 @@ Rails.application.routes.draw do
   match 'homepage' => 'static#homepage', :via => [:get, :post]
 
   get "strategies/new" => "strategies#new"
-
   get "strategies/search" => "strategies#search"
-
   get "strategies/show" => "strategies#show"
+  get "strategies/update" => "strategies#update"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
