@@ -39,7 +39,7 @@ class StrategiesController < ApplicationController
 		end
 
 		def logged_in
-			current_user != nil
+			redirect_to homepage_path, :notice => "You are not logged in." unless current_user
 		end
 
 end

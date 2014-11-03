@@ -2,7 +2,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
 	include BCrypt
 
-	#has_many :strategies
+	has_many :strategies
 
 	#validates :email, :presence => true
 	#validates :email, :with => { :format => /.+@.+\..+/ }
