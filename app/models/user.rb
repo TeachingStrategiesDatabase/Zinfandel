@@ -2,8 +2,8 @@ require 'bcrypt'
 class User < ActiveRecord::Base
 	has_many :strategies
 
-	validates_presence_of :email, :true
-	validates :email, :with => { :format => /.+@.+\..+/ }
+	#validates_presence_of :email, :true
+	#validates :email, :with => { :format => /.+@.+\..+/ }
 
 
 # users.password_hash in the database is a :string
