@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get 'new' => 'strategies#new'
+  get 'home' => 'example#home'
+  post 'create' => 'strategies#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
