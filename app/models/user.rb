@@ -20,4 +20,10 @@ class User < ActiveRecord::Base
 	def verify_password(given_password)
 		Password.new(self.password_hash) == given_password
 	end
+
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
+  end
+
 end

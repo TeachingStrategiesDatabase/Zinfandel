@@ -12,7 +12,7 @@
 	<%= strategy.tech %>
 	<%= strategy.source %>
 	<%= link_to "Update", :controller => 'strategies', :action =>'update', id: strategy.id %>
-	<%= link_to "Destroy", strategy_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+	<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
 
 	<%= label_tag(:kwd, strategy.keywords )  %>
 	<%= label_tag(:sid, strategy.id )  %>

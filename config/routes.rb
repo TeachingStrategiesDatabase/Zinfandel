@@ -6,9 +6,11 @@ Rails.application.routes.draw do
 
   # default_url_options :host => "localhost:3000"
 
+	post 'users/create' => 'users#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :strategies
+	#resources :users
+  #resources :strategies
   # You can have the root of your site routed with "root"
 
   root 'static#homepage'
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
 
   match 'homepage' => 'static#homepage', :via => [:get, :post]
 
+	post 'strategies/:id/delete' => 'strategies#destroy', :as => 'strategy_delete'
   get "strategies/new" => "strategies#new"
   get "strategies/search" => "strategies#search"
   get "strategies/show" => "strategies#show"

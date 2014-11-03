@@ -38,13 +38,11 @@ class StrategiesController < ApplicationController
 		@strategy = @user.strategies.new(strategy_params)
  
   		if @strategy.save
-  			redirect_to ("/home")
+  			redirect_to root_path
   		else
 				@errors = @strategy.errors 
-  			render ("new")
+  			render "new"
   		end
-		#render plain: params[:strategy].inspect
-		#redirect_to("/home")
 	end
 
 	def update
