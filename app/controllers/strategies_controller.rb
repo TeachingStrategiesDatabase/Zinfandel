@@ -23,8 +23,9 @@ class StrategiesController < ApplicationController
     end
         
 	def update
+        #redirect_to :action => 'update'
+        #@strategy= Strategy.find(params[:id])
         
-        @strategy= Strategy.find(params[:id])
 	end
 
 	def destroy
