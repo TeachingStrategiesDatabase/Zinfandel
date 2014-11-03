@@ -6,8 +6,6 @@ class CreateStrategies < ActiveRecord::Migration
         t.column :tech, :string
         t.column :source, :string
 
-	t.column :keywords, :string
-
         t.timestamps
     end
   end
