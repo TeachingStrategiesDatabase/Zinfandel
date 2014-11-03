@@ -6,9 +6,14 @@ class UsersController < ApplicationController
 
 	def create
 # check to see that confirm_password == password before continuing
-	@user = User.new(user_info_params)
-	@user.save
-	end
+	  if confirm_password != password
+		@errors = @users.errors
+#		redirect_to (/"create")
+	  else
+
+		@user = User.new(user_info_params)
+		@user.save
+	 end
 
   private
   def user_info_params
@@ -23,5 +28,4 @@ class UsersController < ApplicationController
 	def destroy
 
 	end
-
 end
