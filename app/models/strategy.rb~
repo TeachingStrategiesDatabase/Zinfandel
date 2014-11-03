@@ -41,6 +41,6 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-		find_by_sql( ["SELECT * FROM strategies WHERE title LIKE ? LIMIT ? OFFSET ?",title, 2, (page.to_i-1)*2 ])
+		find_by_sql( ["SELECT * FROM strategies WHERE title LIKE ? LIMIT ? OFFSET ?",title, 2, (page-1)*2 ])
 	end
 end

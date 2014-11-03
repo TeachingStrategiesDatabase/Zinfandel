@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20141025030759) do
     t.text     "body"
     t.string   "tech"
     t.string   "source"
+    t.string   "keywords"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

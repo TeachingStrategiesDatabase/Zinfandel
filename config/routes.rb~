@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   get "strategies/new" => "strategies#new"
 
   get "strategies/search" => "strategies#search"
-
-  get "strategies/show" => "strategies#show"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

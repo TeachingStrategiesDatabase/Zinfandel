@@ -7,7 +7,7 @@ class StrategiesController < ApplicationController
 	def search
 		@page = params[:page]
 		if not @page
-			@page = '1'
+			@page = 1
 		end
 		@dep = params[:department]
 		@sub = params[:subject]
