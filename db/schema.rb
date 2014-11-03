@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141025030759) do
+=======
+ActiveRecord::Schema.define(version: 20141103035458) do
+>>>>>>> cc0d04e60a053e032a86b0366ad3ef0137e25a52
 
   create_table "strategies", force: true do |t|
     t.string   "title"
@@ -20,6 +24,11 @@ ActiveRecord::Schema.define(version: 20141025030759) do
     t.string   "source"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
+=======
+    t.integer  "user_id"
+    t.string   "keywords"
+>>>>>>> cc0d04e60a053e032a86b0366ad3ef0137e25a52
   end
 
   create_table "users", force: true do |t|
@@ -29,6 +38,10 @@ ActiveRecord::Schema.define(version: 20141025030759) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
+=======
+    t.string   "session_token"
+>>>>>>> cc0d04e60a053e032a86b0366ad3ef0137e25a52
   end
 
 end

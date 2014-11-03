@@ -1,0 +1,15 @@
+<!-- Site header -->
+<div class="site-logo">
+	<!-- DU image goes here -->
+</div>
+<div>
+	<div class="site-title">
+		<p class="site-title-main">Zinfandel</p>
+		<p class="site-title-desc">Teaching Strategy Database</p>
+	</div>
+	<% if current_user %>
+		<%= render 'users/current_user' %>
+	<% else %>
+		<%= link_to "Log In", login_path %>
+	<% end %>
+</div> 

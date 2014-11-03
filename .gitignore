@@ -10,6 +10,7 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/db/schema.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -49,3 +50,7 @@ build/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+# ignore my notes!
+css_notes.txt
+notes.txt

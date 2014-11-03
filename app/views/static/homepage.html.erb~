@@ -1,6 +1,7 @@
 <!-- Home page view - searching and all that -->
 
-<%= form_tag({controller:"strategies",action:"search"}, method:"get", class:"searchForm") do %>
+
+<%= form_tag({controller:"strategies",action:"search",page:1}, method:"get", class:"searchForm") do %>
 	<%= label_tag(:title, "Search Strategies") %>
 	<p></p>
 	<%= label_tag(:department ) %>
@@ -28,4 +29,7 @@
 <%end%>
 	
 
+
+<p></p>
 <%= link_to 'Insert a strategy', :controller => 'strategies', :action =>'new' %>
+
