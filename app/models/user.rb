@@ -1,7 +1,33 @@
+require 'bcrypt'
 class User < ActiveRecord::Base
 	has_many :strategies
 
 	validates_presence_of :email, :true
 	validates :email, :with => { :format => /.+@.+\..+/ }
 
+
+# users.password_hash in the database is a :string
+  include BCrypt
+
+#  def password
+#    @password ||= Password.new(password_hash)
+#  end
+
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
+  end
+
+
+# autheticating a user
+=begin
+def login
+  @user = User.find_by_email(params[:email])
+  if @user.password == params[:password]
+    give_token
+  else
+    redirect_to home_url
+  end
+end
+=end
 end
