@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
 					cookies[:sid] = user.session_token
 				end
 				redirect_to homepage_path
+				return
 
 			else
 				flash[:error] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."

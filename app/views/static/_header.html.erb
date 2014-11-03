@@ -9,5 +9,7 @@
 	</div>
 	<% if current_user %>
 		<%= render 'users/current_user' %>
+	<% else %>
+		<%= link_to "Log In", login_path %>
 	<% end %>
 </div> 

@@ -2,10 +2,10 @@ require 'bcrypt'
 class User < ActiveRecord::Base
 	include BCrypt
 
-	has_many :strategies
+	#has_many :strategies
 
-	validates :email, :presence => true
-	validates :email, :with => { :format => /.+@.+\..+/ }
+	#validates :email, :presence => true
+	#validates :email, :with => { :format => /.+@.+\..+/ }
 
 	def log_in
 		self.session_token = SecureRandom.base64
