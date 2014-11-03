@@ -1,2 +1,23 @@
 <!-- Specific strategy page -->
 
+<p>  All Strategies  </p>
+
+<table>
+<tr>
+<th>Title</th>
+<th>body</th>
+<th>Technology</th>
+<th>Source</th>
+</tr>
+
+<% @strategies.each do |strategy| %>
+<tr>
+<td> <%= strategy.title %> </td>
+<td> <%= strategy.body %> </td>
+<td> <%= strategy.tech %> </td>
+<td> <%= strategy.source %> </td>
+<td> <%= link_to "Update", controller: "strategies", action: "edit", id: strategy.id %> </td>
+<td> <%= link_to "Destroy", controller: "strategies", method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %> </td>
+</tr>
+<% end %>
+</table>
