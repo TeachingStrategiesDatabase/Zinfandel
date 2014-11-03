@@ -1,13 +1,5 @@
 class Strategy < ActiveRecord::Base
 	belongs_to :user
-	validates :title, presence: true,
-                    length: { minimum: 3 }
-    #validates :subject, presence: true,
-                    #length: { minimum: 3 }
-    #validates :department, presence: true,
-                    #length: { minimum: 3 }
-    validates :body, presence: true,
-                    length: { minimum: 10 }
 
 	def self.search(dep,sub,kwd,ttle,aut,page)
 		department = '%%'
@@ -49,6 +41,6 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-		find_by_sql( ["SELECT * FROM strategies WHERE title LIKE ? LIMIT ? OFFSET ?",title, 2, (page.to_i-1)*2 ])
+		find_by_sql( ["SELECT * FROM strategies WHERE title LIKE ? LIMIT ? OFFSET ?",title, 2, (page-1)*2 ])
 	end
 end

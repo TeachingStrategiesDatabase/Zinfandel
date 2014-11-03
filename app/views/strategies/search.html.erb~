@@ -1,0 +1,22 @@
+<!-- Search result page - list results of search -->
+
+
+<% @currentPage.each do |stg| %>
+	<p></p>
+	<% title = "Title: " %>
+	<% title += stg.title %>
+	<%= link_to title, {:controller => "strategies" , :action => "show" ,:id =>stg.id}  %>
+
+
+
+	<%= label_tag(:kwd, stg.keywords )  %>
+	<%= label_tag(:sid, stg.id )  %>
+<%end%>
+
+<p></p>
+<%= link_to_if @page.to_i>1 , 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page-1)} %>
+
+<%= link_to_if @notLastPage , 'Next Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page+1)} %>
+
+<p></p>
+<%= link_to 'HomePage', :controller => 'static', :action =>'homepage' %>
