@@ -16,7 +16,7 @@
 <td> <%= strategy.body %> </td>
 <td> <%= strategy.tech %> </td>
 <td> <%= strategy.source %> </td>
-<td> <%= link_to "Update", :controller => 'strategies', :action =>'update', id: strategy.id %> </td>
+<td> <%= link_to "Update", edit_strategy_path(strategy) %> </td>
 <td> <%= link_to "Destroy", strategy_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %> </td>
 </tr>
 <% end %>

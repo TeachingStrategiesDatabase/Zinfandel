@@ -12,7 +12,8 @@ class StrategiesController < ApplicationController
     
 
 	def create
-      render plain: params[:strategy].inspect
+        render plain: params[:strategy].inspect
+        #Strategy.create(strategy_params)
     end
         
         
@@ -21,12 +22,34 @@ class StrategiesController < ApplicationController
             
             
     end
-        
+    
+    def edit
+        @strategy = Strategy.find(params[:id])
+    end
+    
+    
 	def update
-        #redirect_to :action => 'update'
-        #@strategy= Strategy.find(params[:id])
+        @strategy = Strategy.find(params[:id])
         
-	end
+        if @strategy.update(strategy_params)
+            redirect_to @strategy
+        else
+            render 'edit'
+        end
+        
+        #private
+        def strategy_params
+            params.require(:strategy).permit(:title, :body, :tech, :source)
+        end
+    end
+        
+        
+        def strategy_params
+            params.require(:strategy).permit(:title, :body, :tech, :source)
+        end
+    
+    
+    
 
 	def destroy
         
