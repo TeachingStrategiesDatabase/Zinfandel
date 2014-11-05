@@ -25,25 +25,31 @@ class StrategiesController < ApplicationController
 	end
 
 	def new
+		@departmentList = Department.getDepartmentList()
+		@subjectList = Subject.getSubjectList()
+
 		@strategy = Strategy.new
 	end
     
-  def index
+	def index
       
-  end
+	end
     
-
+# previous implementation of create
 	def create
 		@user = current_user
 		@strategy = @user.strategies.new(strategy_params)
- 
-  		if @strategy.save
+#need to change department and subject from integer to string
+ 		if @strategy.save
+#need to add rows to keywords table
   			redirect_to root_path
   		else
-				@errors = @strategy.errors 
+			@errors = @strategy.errors 
   			render "new"
   		end
 	end
+
+
 
 	def update
         #redirect_to :action => 'update'

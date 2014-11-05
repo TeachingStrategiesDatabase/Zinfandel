@@ -1,11 +1,10 @@
 <!-- Home page view - searching and all that -->
 
-
-<%= form_tag({controller:"strategies",action:"search",page:1}, method:"get", class:"searchForm") do %>
+<%= form_tag({controller:"strategies",action:"search"}, method:"get", class:"searchForm") do %>
 	<%= label_tag(:title, "Search Strategies") %>
 	<p></p>
 	<%= label_tag(:department ) %>
-	<%= select_tag(:department, options_for_select([['select a department',1],['CS',2]],1)) %>
+	<%= select_tag(:department, options_for_select(@departmentList,1)) %>
 	<p></p>
 	<%= label_tag(:subject ) %>
 	<%= select_tag(:subject, options_for_select([['select a subject',1],['CS',2]],1)) %>
@@ -29,7 +28,4 @@
 <%end%>
 	
 
-
-<p></p>
 <%= link_to 'Insert a strategy', :controller => 'strategies', :action =>'new' %>
-

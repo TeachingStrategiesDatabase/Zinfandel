@@ -8,14 +8,14 @@
 	<%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %>
 
 
-	<%= strategy.body %>
 	<%= strategy.tech %>
 	<%= strategy.source %>
 	<%= link_to "Update", :controller => 'strategies', :action =>'update', id: strategy.id %>
 	<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
 
-	<%= label_tag(:kwd, strategy.keywords )  %>
-	<%= label_tag(:sid, strategy.id )  %>
+	<%= label_tag(:author,"Author :" + strategy.name)  %>
+	<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
+
 <%end%>
 
 <p></p>

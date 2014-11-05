@@ -2,45 +2,53 @@ class Strategy < ActiveRecord::Base
 	belongs_to :user
 	validates :title, presence: true,
                     length: { minimum: 3 }
-    #validates :subject, presence: true,
-                    #length: { minimum: 3 }
-    #validates :department, presence: true,
-                    #length: { minimum: 3 }
+    #validates :subject.to_i>1,
+                  
+    #validates :department.to_i>1
+
     validates :body, presence: true,
                     length: { minimum: 10 }
 
 	def self.search(dep,sub,kwd,ttle,aut,page)
-		department = '%%'
-		case dep
-		when 1
+		
+		if dep == '1'
+		#the user does not actually choose a department
 			department = '%%'
-		when 2
-			department = '%Computer Science%'
 		else
-			department = '%%'
+			department = '%' + Department.find(dep).name + '%'
 		end
 
-		subject = '%%'
-		case sub
-		when 1
+		if sub == '1'
+		#the user does not actually choose a subject
 			subject = '%%'
-		when 2
-			subject = '%Computer Science%'
 		else
-			subject = '%%'
+			subject = '%' + Subject.find(sub).name + '%'
 		end
 
-		if not kwd
-			keyword = '%%'
-		else
-			keyword = '%' + kwd + '%'
-		end
 
+		keywords = kwd.split
+		if keywords ==[]
+			keywords = ['%%']
+		else
+			keywords.each do |k|
+				k = '%' + k +'%'
+			end
+		end
+		sql_byKeyword = "(SELECT strategy_id, COUNT(*) AS relativity FROM keywords WHERE keyword LIKE "
+		keywords.each do |k|
+			sql_byKeyword = sql_byKeyword + '\'' + k + '\' OR keyword LIKE'
+		end
+#the length of string ' OR keyword LIKE' is 15
+		sql_byKeyword = sql_byKeyword.slice(0,sql_byKeyword.length-15)
+		sql_byKeyword = sql_byKeyword + ' GROUP BY strategy_id) AS K '
+		
+		
 		if not ttle
 			title = '%%'
 		else
 			title = '%' + ttle + '%'
 		end
+
 
 		if not aut
 			author = '%%'
@@ -49,6 +57,6 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-		find_by_sql( ["SELECT * FROM strategies WHERE title LIKE ? LIMIT ? OFFSET ?",title, 2, (page.to_i-1)*2 ])
+		find_by_sql( ["SELECT * FROM strategies S, users U, " + sql_byKeyword + "WHERE S.id = K.strategy_id AND S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ? ORDER BY K.relativity DESC LIMIT ? OFFSET ?", author, title, department, subject, 2, (page.to_i-1)*2 ])
 	end
 end
