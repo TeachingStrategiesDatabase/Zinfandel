@@ -1,7 +1,8 @@
 class StaticController < ApplicationController
 
 	def homepage
-		@departmentList = Department.getDepartmentList()
+		@departmentList = Department.departmentsForSelect #Department.getDepartmentList()
+		
 		@subjectList = Subject.getSubjectList()
 	end
 

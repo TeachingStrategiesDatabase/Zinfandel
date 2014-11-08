@@ -34,7 +34,7 @@ class Strategy < ActiveRecord::Base
 				k = '%' + k +'%'
 			end
 		end
-		sql_byKeyword = "(SELECT strategy_id, COUNT(*) AS relativity FROM keywords WHERE keyword LIKE "
+		sql_byKeyword = "(SELECT strategy_id, COUNT(*) AS relevance FROM keywords WHERE keyword LIKE "
 		keywords.each do |k|
 			sql_byKeyword = sql_byKeyword + '\'' + k + '\' OR keyword LIKE'
 		end
@@ -57,6 +57,6 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-		find_by_sql( ["SELECT * FROM strategies S, users U, " + sql_byKeyword + "WHERE S.id = K.strategy_id AND S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ? ORDER BY K.relativity DESC LIMIT ? OFFSET ?", author, title, department, subject, 2, (page.to_i-1)*2 ])
+		find_by_sql( ["SELECT * FROM strategies S, users U, " + sql_byKeyword + "WHERE S.id = K.strategy_id AND S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ? ORDER BY K.relevance DESC LIMIT ? OFFSET ?", author, title, department, subject, 2, (page.to_i-1)*2 ])
 	end
 end

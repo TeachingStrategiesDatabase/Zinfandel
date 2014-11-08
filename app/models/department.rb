@@ -1,5 +1,9 @@
 class Department < ActiveRecord::Base
 
+	def self.departmentsForSelect
+		Department.all.collect { |d| [d.name, d.id] }
+	end
+
 	def self.getDepartmentList
 		connection.select_all("SELECT name, id FROM departments").rows
 	end
