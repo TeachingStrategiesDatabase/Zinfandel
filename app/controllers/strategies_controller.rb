@@ -25,25 +25,33 @@ class StrategiesController < ApplicationController
 	end
 
 	def new
+		@departmentList = Department.getDepartmentList()
+		@subjectList = Subject.getSubjectList()
+
 		@strategy = Strategy.new
 	end
     
-  def index
+	def index
       
-  end
+	end
     
-
+# previous implementation of create
 	def create
 		@user = current_user
 		@strategy = @user.strategies.new(strategy_params)
- 
-  		if @strategy.save
+		@strategy.department = numToName(@departmentList,@strategy.department)
+		@strategy.subject = numToName(@subjectList,@strategy.subject)
+#need to change department and subject from integer to string
+ 		if @strategy.save
+#need to add rows to keywords table
   			redirect_to root_path
   		else
-				@errors = @strategy.errors 
+			@errors = @strategy.errors 
   			render "new"
   		end
 	end
+
+
 
 	def update
         #redirect_to :action => 'update'
@@ -63,6 +71,8 @@ class StrategiesController < ApplicationController
 			#params.require(:title,:department,:subject,:body).permit(:tech)
 			params.require(:strategy).permit(:title,:body,:tech)
 		end
+
+		
 
 		def logged_in
 			redirect_to homepage_path, :notice => "You are not logged in." unless current_user
