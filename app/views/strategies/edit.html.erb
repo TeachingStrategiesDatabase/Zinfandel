@@ -1,0 +1,41 @@
+<!-- show the record to update it -->
+
+
+<p> Update Specific Strategy: </p>
+
+<%= form_for :strategy, url: strategy_path(@strategy), method: :patch do |f| %>
+<% if @strategy.errors.any? %>
+<div id="error_explanation">
+<h2><%= pluralize(@strategy.errors.count, "error") %> prohibited
+this article from being saved:</h2>
+<ul>
+<% @strategy.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+</div>
+<% end %>
+<p>
+<%= f.label :title %><br>
+<%= f.text_field :title %>
+</p>
+
+<p>
+<%= f.label :body %><br>
+<%= f.text_area :body %>
+</p>
+
+<p>
+<%= f.label :technology %><br>
+<%= f.text_area :tech %>
+</p>
+
+<p>
+<%= f.label :source %><br>
+<%= f.text_area :source %>
+</p>
+
+<p>
+<%= f.submit %>
+</p>
+<% end %>

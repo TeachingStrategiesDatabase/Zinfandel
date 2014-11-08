@@ -1,0 +1,10 @@
+Use normalize.css for a CSS reset
+
+Classes:
+
+header (should be 100% width, absolute height, DU red background)
+
+site-logo (should be an absolute width and height, big enough to accomodate the picture)
+site-title
+	site-title-main (main site title, big, special font)
+	site-title-desc (site description)

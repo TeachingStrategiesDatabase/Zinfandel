@@ -37,6 +37,7 @@ class StrategiesController < ApplicationController
     
 # previous implementation of create
 	def create
+<<<<<<< HEAD
 		@user = current_user
 		@strategy = @user.strategies.new(strategy_params)
 		@strategy.department = numToName(@departmentList,@strategy.department)
@@ -51,14 +52,21 @@ class StrategiesController < ApplicationController
   		end
 	end
 
-
-
+    def edit
+        @strategy = Strategy.find(params[:id])
+    end
+    
 	def update
-        #redirect_to :action => 'update'
-        #@strategy= Strategy.find(params[:id])
+        @strategy = Strategy.find(params[:id])
         
-	end
-
+        if @strategy.update(strategy_params)
+            redirect_to @strategy
+        else
+            render 'edit'
+        end
+        
+    end
+        
 	def destroy
         
         @strategy = Strategy.find(params[:id])
@@ -67,18 +75,7 @@ class StrategiesController < ApplicationController
 	end
 
 	private
-		def strategy_params
-			#params.require(:title,:department,:subject,:body).permit(:tech)
-			params.require(:strategy).permit(:title,:body,:tech)
-		end
-
-<<<<<<< HEAD
-=======
-		
-
-		def logged_in
-			redirect_to homepage_path, :notice => "You are not logged in." unless current_user
-		end
-
->>>>>>> mitchell
+        def strategy_params
+            params.require(:strategy).permit(:title, :body, :tech, :source)
+        end
 end

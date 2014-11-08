@@ -12,6 +12,11 @@ get 'users/new' => 'users#new'
   # See how all your routes lay out with "rake routes".
 	#resources :users
   #resources :strategies
+  
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+  resources :strategies
+  
   # You can have the root of your site routed with "root"
 
   root 'static#homepage'
