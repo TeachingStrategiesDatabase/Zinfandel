@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   match 'logout' => 'sessions#destroy', :via => [:get, :post]
 
-  match 'homepage' => 'static#homepage', :via => [:get, :post]
-
   get 'admin' => 'users#admin'
   put 'admin/update' => 'users#admin_update_depts_subjects', :as => 'admin_update'
 

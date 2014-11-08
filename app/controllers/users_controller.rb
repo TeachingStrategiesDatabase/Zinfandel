@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+	before_filter :logged_in, :except => [:new, :create]
+	before_filter :user_is_admin, :only => [:admin, :admin_update_depts_subjects]
+
 	def new
 	end
 
