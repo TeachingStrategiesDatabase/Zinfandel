@@ -37,7 +37,6 @@ class StrategiesController < ApplicationController
     
 # previous implementation of create
 	def create
-<<<<<<< HEAD
 		@user = current_user
 		@strategy = @user.strategies.new(strategy_params)
 		@strategy.department = numToName(@departmentList,@strategy.department)
