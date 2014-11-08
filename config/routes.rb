@@ -15,7 +15,7 @@ get 'users/new' => 'users#new'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :strategies
+  #resources :strategies
   
   # You can have the root of your site routed with "root"
 
@@ -29,11 +29,12 @@ get 'users/new' => 'users#new'
   get 'admin' => 'users#admin'
   put 'admin/update' => 'users#admin_update_depts_subjects', :as => 'admin_update'
 
-	post 'strategies/:id/delete' => 'strategies#destroy', :as => 'strategy_delete'
+  delete 'strategies/:id/delete' => 'strategies#destroy', :as => 'strategy_delete'
   get "strategies/new" => "strategies#new"
   get "strategies/search" => "strategies#search"
-  get "strategies/show" => "strategies#show"
-  get "strategies/update" => "strategies#update"
+  get "strategies/show/:id" => "strategies#show"
+  get "strategies/edit/:id" => "strategies#edit"
+  patch "strategies/update/:id" => "strategies#update", :as => 'strategy_update'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -3,7 +3,7 @@
 
 <p> Update Specific Strategy: </p>
 
-<%= form_for :strategy, url: strategy_path(@strategy), method: :patch do |f| %>
+<%= form_for :strategy, url: strategy_update_path(@strategy), method: :patch do |f| %>
 <% if @strategy.errors.any? %>
 <div id="error_explanation">
 <h2><%= pluralize(@strategy.errors.count, "error") %> prohibited
