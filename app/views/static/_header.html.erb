@@ -8,6 +8,7 @@
 		<p class="site-title-desc">Teaching Strategy Database</p>
 	</div>
 	<% if current_user %>
+		<%= link_to('Admin', admin_path) if current_user.is_admin? %>
 		<%= render 'users/current_user' %>
 	<% else %>
 		<%= link_to "Log In", login_path %>

@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   match 'homepage' => 'static#homepage', :via => [:get, :post]
 
+  get 'admin' => 'users#admin'
+  put 'admin/update' => 'users#admin_update_depts_subjects', :as => 'admin_update'
+
 	post 'strategies/:id/delete' => 'strategies#destroy', :as => 'strategy_delete'
   get "strategies/new" => "strategies#new"
   get "strategies/search" => "strategies#search"
