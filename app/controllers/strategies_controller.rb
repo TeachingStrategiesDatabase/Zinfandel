@@ -70,8 +70,4 @@ class StrategiesController < ApplicationController
 			params.require(:strategy).permit(:title,:body,:tech)
 		end
 
-		def logged_in
-			redirect_to homepage_path, :notice => "You are not logged in." unless current_user
-		end
-
 end
