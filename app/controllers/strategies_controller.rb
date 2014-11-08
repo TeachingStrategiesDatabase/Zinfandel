@@ -39,6 +39,8 @@ class StrategiesController < ApplicationController
 	def create
 		@user = current_user
 		@strategy = @user.strategies.new(strategy_params)
+		@strategy.department = numToName(@departmentList,@strategy.department)
+		@strategy.subject = numToName(@subjectList,@strategy.subject)
 #need to change department and subject from integer to string
  		if @strategy.save
 #need to add rows to keywords table
@@ -70,4 +72,13 @@ class StrategiesController < ApplicationController
 			params.require(:strategy).permit(:title,:body,:tech)
 		end
 
+<<<<<<< HEAD
+=======
+		
+
+		def logged_in
+			redirect_to homepage_path, :notice => "You are not logged in." unless current_user
+		end
+
+>>>>>>> mitchell
 end
