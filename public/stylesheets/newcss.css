@@ -1,0 +1,13 @@
+
+
+p
+{
+background-color: #b0c4de;
+}
+
+body {
+    background-image: url("du.jpg");
+    
+    background-repeat: no-repeat;
+    background-position: right top;
+}
