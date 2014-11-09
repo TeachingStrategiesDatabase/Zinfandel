@@ -1,0 +1,16 @@
+General
+	Administrator creates list of approved departments and subjects
+
+
+
+Mitch
+	Need search on multiple attributes
+
+Jingwei
+	Need search for multiple keywords
+
+Scott
+	Search page should get list of depts and subjects from administrator's list
+
+Sally
+	Number of records per page should be able to be set by the user (higher default would be good, around 20-30)

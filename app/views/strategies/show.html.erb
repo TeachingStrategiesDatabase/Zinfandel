@@ -1,4 +1,5 @@
 <!-- Specific strategy page -->
+
 <%= stylesheet_link_tag "newcss.css" %>
 <p>  All Strategies  </p>
 <p> --  </p>
@@ -10,15 +11,11 @@
 <th>Technology</th>
 <th>Source</th>
 </tr>
+=======
 
-<% @strategies.each do |strategy| %>
-<tr>
-<td> <%= strategy.title %> </td>
-<td> <%= strategy.body %> </td>
-<td> <%= strategy.tech %> </td>
-<td> <%= strategy.source %> </td>
-<td> <%= link_to "Update", edit_strategy_path(strategy) %> </td>
-<td> <%= link_to "Destroy", strategy_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %> </td>
-</tr>
-<% end %>
-</table>
+<%= label_tag(:kwd, @AStrategy.keywords )  %>
+
+<p></p>
+>>>>>>> master
+
+<%= link_to 'HomePage', :controller => 'static', :action =>'homepage' %>

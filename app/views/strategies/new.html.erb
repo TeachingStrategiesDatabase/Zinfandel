@@ -1,0 +1,49 @@
+<!-- Insertion page - form for creating a new strategy -->
+<%= form_for :strategy,url: '/create' do |f| %>
+  <!--Check for error messages-->
+  <% if @strategy.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@strategy.errors.count, "error") %> prohibited
+      this article from being saved:</h2>
+    <ul>
+    <% @strategy.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <!--Display form-->
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :tech %><br>
+    <%= f.text_field :tech %>
+  </p>
+
+	<p>
+		<%= f.label :keywords %><br>
+		<%= f.text_field :keywords %>
+	</p>
+
+	<!-- Department and subject would go here -->
+	<p>
+		<%= f.label :department %><br>
+		<%= f.select :department, options_for_select(@departmentList,1) %>
+	</p>
+	<p>
+		<%= f.label :subject %><br>
+		<%= f.select :subject, options_for_select(@subjectList,1) %>
+	</p>
+
+  <p>
+    <%= f.label "Strategy Description" %><br>
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.submit :"Submit Strategy" %>
+  </p>
+<% end %>
