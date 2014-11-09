@@ -31,11 +31,11 @@
 	<!-- Department and subject would go here -->
 	<p>
 		<%= f.label :department %><br>
-		<%= f.select :department, options_for_select(@departmentList,1) %>
+		<%= f.select :department, options_for_select([["None", nil]] + @departmentList,1) %>
 	</p>
 	<p>
 		<%= f.label :subject %><br>
-		<%= f.select :subject, options_for_select(@subjectList,1) %>
+		<%= f.select :subject, options_for_select([["None", nil]] + @subjectList,1) %>
 	</p>
 
   <p>

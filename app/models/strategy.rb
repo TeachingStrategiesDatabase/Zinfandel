@@ -1,5 +1,6 @@
 class Strategy < ActiveRecord::Base
 	belongs_to :user
+	has_many :keywordst
 	validates :title, presence: true,
                     length: { minimum: 3 }
     #validates :subject.to_i>1,

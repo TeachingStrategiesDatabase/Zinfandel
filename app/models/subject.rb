@@ -4,7 +4,8 @@ class Subject < ActiveRecord::Base
 		connection.select_all("SELECT name, id FROM subjects").rows
 	end
 
-	def self.insertSubject(subjectName)
+	def self.insertKeyword(subjectName)
 		connection.execute("INSERT INTO subjects(name) VAlUES (\'" + subjectName + "\')")
 	end
+
 end
