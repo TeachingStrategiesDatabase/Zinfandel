@@ -75,7 +75,7 @@ class StrategiesController < ApplicationController
         @strategy = Strategy.find(params[:id])
         
         if @strategy.update(strategy_params)
-            redirect_to @strategy
+            redirect_to root_path
         else
             render 'edit'
         end
