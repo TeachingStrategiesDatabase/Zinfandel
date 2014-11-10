@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
 		redirect_to login_path, :notice => "You are not logged in." unless current_user
 	end
 
+	def user_owns_strategy
+		redirect_to login_path, :notice => "Please log in to the correct account." unless current_user.is_author?(Strategy.find(params[:id])) || current_user.is_admin?
+	end
+
 	def user_is_admin
 		redirect_to root_path, :notice => "You must be admin to view this page." unless current_user.is_admin?
 	end

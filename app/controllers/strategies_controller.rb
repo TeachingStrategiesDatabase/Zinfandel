@@ -2,7 +2,8 @@ class StrategiesController < ApplicationController
 
 	PAGE_ENTRIES_DEFAULT = 20
 
-	before_filter :logged_in, :only => [:new, :create, :update, :destroy]
+	before_filter :logged_in, :only => [:new, :create, :edit, :update, :destroy]
+	before_filter :user_owns_strategy, :only => [:edit, :update, :destroy]
 
 	def show
 		@AStrategy = Strategy.find(params[:id])

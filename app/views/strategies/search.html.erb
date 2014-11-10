@@ -9,8 +9,10 @@
 				<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %></h1>
 			</div>
 			<div class="large-2 columns clearfix">
-				<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
-				<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+				<% if current_user && (current_user.is_author?(strategy) || current_user.is_admin?) %>
+					<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
+					<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+				<% end %>
 			</div>
 		</div>
 		<%= label_tag(:author,"Author :" + strategy.user.name)  %>
