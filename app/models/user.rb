@@ -11,10 +11,13 @@ class User < ActiveRecord::Base
 		self.admin
 	end
 
+<<<<<<< HEAD
 	def is_author(strategy)
 		self.id==strategy.user.id
 	end
 
+=======
+>>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
 	def log_in
 		self.session_token = SecureRandom.base64
 		self.save

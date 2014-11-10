@@ -30,8 +30,8 @@
 
 	<!-- Department and subject would go here -->
 	<p>
-		<%= f.label :department %><br>
-		<%= f.select :department, options_for_select(@departmentList,1) %>
+		<%= label_tag :department %><br>
+		<%= select_tag :department, options_for_select(@departmentList,1) %>
 	</p>
 	<p>
 		<%= label_tag :subject %><br>

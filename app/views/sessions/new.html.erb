@@ -1,6 +1,8 @@
 <!-- Login page - form for creating a new session -->
 
-<div>
+<div class="content-item">
+	<h1>Log in to your account</h1>
+
 	<%= form_tag do %>
 
 	<%= label_tag :email %>
@@ -9,9 +11,9 @@
 	<%= label_tag :password %>
 	<%= password_field_tag :password %>
 
-	<p>Remember Me<%= check_box_tag :forget_me_not %></p>
+	<p>Remember Me  <%= check_box_tag :forget_me_not %></p>
 
-	<%= submit_tag "Log In" %>
+	<%= submit_tag "Log In", {:class => "button radius success"} %>
 
 	<% end %>
 </div>
