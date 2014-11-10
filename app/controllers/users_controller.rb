@@ -41,14 +41,14 @@ class UsersController < ApplicationController
 		current_subjects = Subject.all.collect { |s| s.name }
 
 		# add new values to the database
-		new_depts = params[:departments].split(', ').reject { |d_name| current_depts.include?(d_name) }
-		new_subjects = params[:subjects].split(', ').reject { |s_name| current_subjects.include?(s_name) }
+		new_depts = params[:departments].split(/,\s*/).reject { |d_name| current_depts.include?(d_name) }
+		new_subjects = params[:subjects].split(/,\s*/).reject { |s_name| current_subjects.include?(s_name) }
 		new_depts.each { |d_name| Department.new(:name => d_name).save }
 		new_subjects.each { |s_name| Subject.new(:name => s_name).save }
 
 		# remove old values from the database
-		old_depts = current_depts.reject { |d| params[:departments].split(', ').include?(d) }
-		old_subjects = current_subjects.reject { |s| params[:subjects].split(', ').include?(s) }
+		old_depts = current_depts.reject { |d| params[:departments].split(/,\s*/).include?(d) }
+		old_subjects = current_subjects.reject { |s| params[:subjects].split(/,\s*/).include?(s) }
 		old_depts.each { |d| Department.find_by_name(d).destroy }
 		old_subjects.each { |s| Subject.find_by_name(s).destroy }
 

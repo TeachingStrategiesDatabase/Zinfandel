@@ -4,38 +4,29 @@
 <%= form_for :strategy,url: '/create' do |f| %>
   <%= render 'static/form_errors' %>
   <!--Display form-->
-  <p>
+
     <%= f.label :title %><br>
     <%= f.text_field :title %>
-  </p>
 
-  <p>
     <%= f.label :tech %><br>
     <%= f.text_field :tech %>
-  </p>
 
-	<p>
+	<%= f.label :source %>
+	<%= f.text_field :source %>
+
 		<%= label_tag :keywords, "Keywords (comma- or space-separated)" %><br>
 		<%= text_field_tag :keywords, params[:keywords] %>
-	</p>
 
 	<!-- Department and subject would go here -->
-	<p>
 		<%= label_tag :department %><br>
 		<%= select_tag :department, options_for_select(@departmentList, params[:department]) %>
-	</p>
-	<p>
+
 		<%= label_tag :subject %><br>
 		<%= select_tag :subject, options_for_select(@subjectList, params[:subject]) %>
-	</p>
 
-  <p>
     <%= f.label "Strategy Description" %><br>
     <%= f.text_area :body %>
-  </p>
 
-  <p>
     <%= f.submit "Submit Strategy", :class => "button radius success" %>
-  </p>
 <% end %>
 </div>

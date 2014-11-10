@@ -31,8 +31,8 @@ class Strategy < ActiveRecord::Base
 		end
 
 
-		keywords = kwd.split(/(?:,|\s)+/)
-		if keywords ==[]
+		keywords = kwd.split(/(?:,|\s)+/) if kwd
+		if keywords.nil? || keywords ==[]
 			keywords = ['%%']
 			sql_byKeyword = ''
 			sql_order = ''
