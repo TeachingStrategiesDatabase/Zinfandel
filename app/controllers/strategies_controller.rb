@@ -26,7 +26,7 @@ class StrategiesController < ApplicationController
 			cookies[:page_entries] = params[:entry_number]
 		end
 	
-		entries_per_page = cookies[:page_entries].to_i || PAGE_ENTRIES_DEFAULT	
+		entries_per_page = !cookies[:page_entries].blank? ? cookies[:page_entries].to_i : PAGE_ENTRIES_DEFAULT	
 		@currentPage = Strategy.search(params[:department],params[:subject],params[:keywords],params[:title],params[:author], @page, entries_per_page)
 		if @currentPage.size < entries_per_page
 			@notLastPage = false
