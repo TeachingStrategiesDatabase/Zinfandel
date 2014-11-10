@@ -1,38 +1,25 @@
 <!-- Registration page - form for creating a new user -->
 
+<div class="content-item">
+	<h1>Create an Account</h1>
 
-<h1>Create a Zinfandel Account</h1>
+	<%= form_for :user,url: '/users/create' do |f| %>
 
-<%= form_for :user,url: '/users/create' do |f| %>
-  <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </p>
+    	<%= f.label :first_name %><br>
+    	<%= f.text_field :first_name %>
  
-  <p>
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </p>
+    	<%= f.label :last_name %><br>
+    	<%= f.text_field :last_name %>
 
-
-
-  <p>
-    <%= f.label "Email Address" %><br>
-    <%= f.text_field :email %>
-  </p>
+    	<%= f.label "Email Address" %><br>
+    	<%= f.text_field :email %>
  
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
+    	<%= f.label :password %><br>
+    	<%= f.password_field :password %>
 
+    	<%= f.label :confirm_password %><br>
+    	<%= f.password_field :confirm_password %>
 
-  <p>
-    <%= f.label :confirm_password %><br>
-    <%= f.password_field :confirm_password %>
-  </p>
-
-  <p>
-    <%= f.submit "Create Account" %>
-  </p>
-<% end %>
+    	<%= f.submit "Create Account", :class => "button radius success" %>
+	<% end %>
+</div>

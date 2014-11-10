@@ -1,24 +1,23 @@
 <!-- Search result page - list results of search -->
 
-
 <% @currentPage.each do |strategy| %>
-	<p></p>
-	<% title = "Title: " %>
-	<% title += strategy.title %>
-	<%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %>
+	<div class="content-item">
+		<% title = "Title: " %>
+		<% title += strategy.title %>
+		<div class="row">
+			<div class="large-10 columns">
+				<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %></h1>
+			</div>
+			<div class="large-2 columns clearfix">
+				<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
+				<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+			</div>
+		</div>
+		<%= label_tag(:author,"Author :" + strategy.user.name)  %>
+		<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
+	</div>
 
-
-	<%= strategy.tech %>
-	<%= strategy.source %>
-	<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
-	<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
-
-	<%= label_tag(:author,"Author :" + strategy.user.name)  %>
-	<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
-
-	<p><%= puts strategy.inspect %></p>
-
-<%end%>
+<% end %>
 
 
 <p></p>

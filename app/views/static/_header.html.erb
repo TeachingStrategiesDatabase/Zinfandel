@@ -1,20 +1,23 @@
 <!-- Site header -->
 <div class="row">
 	<div class="site-logo large-2 columns">
-		<!-- DU image goes here -->
+		<img src="<%= image_url('du_logo.png') %>" alt="University of Denver Logo" />
 	</div>
 	<div class="large-10 columns">
 		<div class="site-title large-4 columns">
-			<p class="site-title-main">Zinfandel</p>
-			<p class="site-title-desc">Teaching Strategy Database</p>
+			<h3><%= link_to 'ZINFANDEL', root_path %></h3>
+			<p>Teaching Strategy Database</p>
 		</div>
-		<div class="large-8 columns clearfix">
-			<% if current_user %>
-				<%= link_to('Admin', admin_path) if current_user.is_admin? %>
-				<%= render 'users/current_user' %>
-			<% else %>
-				<%= link_to "Log In", login_path %>
-			<% end %>
+		<div class="large-4 columns clearfix">
+			<div class="user-box">
+				<% if current_user %>
+					<%= render 'users/current_user' %>
+					<p><small><%= link_to "Log Out", logout_path, :class => "link" %></small></p>
+				<% else %>
+					<p><strong><%= link_to "Sign up now!", users_new_path, :class => "link" %></strong></p>
+					<p><small><%= link_to "Log In", login_path, :class => "link" %></small></p>
+				<% end %>
+			</div>
 		</div>
 	</div> 
 </div>
