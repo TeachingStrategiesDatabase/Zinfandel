@@ -25,8 +25,8 @@ class StrategiesController < ApplicationController
 	end
 
 	def new
-		@departmentList = Department.getDepartmentList()
-		@subjectList = Subject.getSubjectList()
+		@departmentList = Department.departmentsForSelect
+		@subjectList = Subject.subjectsForSelect
 
 		@strategy = Strategy.new
 	end
@@ -39,6 +39,8 @@ class StrategiesController < ApplicationController
 	def create
 		@user = current_user
 		@strategy = @user.strategies.new(strategy_params)
+		@strategy.department = Department.find(params[:department].to_i).name
+		@strategy.subject = Subject.find(params[:department].to_i).name
 #need to change department and subject from integer to string
  		if @strategy.save
 #need to add rows to keywords table
@@ -49,14 +51,21 @@ class StrategiesController < ApplicationController
   		end
 	end
 
-
-
+    def edit
+        @strategy = Strategy.find(params[:id])
+    end
+    
 	def update
-        #redirect_to :action => 'update'
-        #@strategy= Strategy.find(params[:id])
+        @strategy = Strategy.find(params[:id])
         
-	end
-
+        if @strategy.update(strategy_params)
+            redirect_to @strategy
+        else
+            render 'edit'
+        end
+        
+    end
+        
 	def destroy
         
         @strategy = Strategy.find(params[:id])
@@ -65,13 +74,7 @@ class StrategiesController < ApplicationController
 	end
 
 	private
-		def strategy_params
-			#params.require(:title,:department,:subject,:body).permit(:tech)
-			params.require(:strategy).permit(:title,:body,:tech)
-		end
-
-		def logged_in
-			redirect_to homepage_path, :notice => "You are not logged in." unless current_user
-		end
-
+        def strategy_params
+            params.require(:strategy).permit(:title, :body, :tech, :source)
+        end
 end

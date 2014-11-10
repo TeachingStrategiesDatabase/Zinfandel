@@ -10,11 +10,18 @@
 
 	<%= strategy.tech %>
 	<%= strategy.source %>
-	<%= link_to "Update", :controller => 'strategies', :action =>'update', id: strategy.id %>
-	<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
 
-	<%= label_tag(:author,"Author :" + strategy.name)  %>
+	<% if (current_user && current_user.is_author(strategy)) %>
+		<%= link_to "Update", {:controller => "strategies", :action =>"edit", :id=> strategy.id}   %>
+		<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+	<% end %>
+	
+
+
+	<%= label_tag(:author,"Author :" + strategy.user.name)  %>
 	<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
+
+	<p><%= puts strategy.inspect %></p>
 
 <%end%>
 
@@ -24,4 +31,4 @@
 <%= link_to_if @notLastPage , 'Next Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1)} %>
 
 <p></p>
-<%= link_to 'HomePage', :controller => 'static', :action =>'homepage' %>
+<%= link_to 'HomePage', root_path %>

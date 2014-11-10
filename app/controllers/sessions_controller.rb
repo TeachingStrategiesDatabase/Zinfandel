@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 				else
 					cookies[:sid] = user.session_token
 				end
-				redirect_to homepage_path
+				redirect_to root_path
 				return
 
 			else
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
 	def destroy
 		current_user.log_out if current_user
 		cookies.delete(:sid)
-		redirect_to homepage_path
+		redirect_to root_path
 	end
 
 end

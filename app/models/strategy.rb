@@ -1,5 +1,7 @@
 class Strategy < ActiveRecord::Base
 	belongs_to :user
+
+	#has_many :keywords
 	validates :title, presence: true,
                     length: { minimum: 3 }
     #validates :subject.to_i>1,
@@ -32,13 +34,12 @@ class Strategy < ActiveRecord::Base
 			sql_byKeyword = ''
 			sql_order = ''
 		else
-			keywords.each do |k|
-				k = '%' + k +'%'
-			end
+
 			sql_byKeyword = ", (SELECT strategy_id, COUNT(*) AS relevance FROM keywords WHERE keyword LIKE "
 			keywords.each do |k|
 				sql_byKeyword = sql_byKeyword + '\'' + k + '\' OR keyword LIKE'
 			end
+
 #the length of string ' OR keyword LIKE' is 15
 			sql_byKeyword = sql_byKeyword.slice(0,sql_byKeyword.length-15)
 			sql_byKeyword = sql_byKeyword + ' GROUP BY strategy_id) AS K'
@@ -60,6 +61,8 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-		find_by_sql( ["SELECT * FROM strategies S, users U#{sql_byKeyword} WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ?#{sql_order} LIMIT ? OFFSET ?", author, title, department, subject, 2, (page.to_i-1)*2 ])
+
+		find_by_sql( ["SELECT S.* FROM strategies S, users U#{sql_byKeyword} WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ?#{sql_order} LIMIT ? OFFSET ?", author, title, department, subject, 2, (page.to_i-1)*2 ])
+
 	end
 end

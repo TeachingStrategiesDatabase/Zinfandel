@@ -1,0 +1,16 @@
+<% dept_string = @departments.collect { |d| d.name }.join(', ') %>
+<% subj_string = @subjects.collect { |s| s.name }.join(', ') %>
+
+<h1>Adminstration</h1>
+
+<%= form_tag admin_update_path, :method => :put do %>
+
+	<%= label_tag 'Update Available Departments' %>
+	<%= text_area_tag :departments, dept_string %>
+
+	<%= label_tag 'Update Available Subjects' %>
+	<%= text_area_tag :subjects, subj_string %>
+
+	<%= submit_tag 'Update' %>
+
+<% end %>

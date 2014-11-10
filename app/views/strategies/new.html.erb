@@ -34,8 +34,8 @@
 		<%= f.select :department, options_for_select(@departmentList,1) %>
 	</p>
 	<p>
-		<%= f.label :subject %><br>
-		<%= f.select :subject, options_for_select(@subjectList,1) %>
+		<%= label_tag :subject %><br>
+		<%= select_tag :subject, options_for_select(@subjectList,1) %>
 	</p>
 
   <p>

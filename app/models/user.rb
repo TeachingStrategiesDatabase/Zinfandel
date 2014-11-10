@@ -7,6 +7,14 @@ class User < ActiveRecord::Base
 	#validates :email, :presence => true
 	#validates :email, :with => { :format => /.+@.+\..+/ }
 
+	def is_admin?
+		self.admin
+	end
+
+	def is_author(strategy)
+		self.id==strategy.user.id
+	end
+
 	def log_in
 		self.session_token = SecureRandom.base64
 		self.save
