@@ -1,24 +1,40 @@
 <!-- Search result page - list results of search -->
 
-
 <% @currentPage.each do |strategy| %>
-	<p></p>
-	<% title = "Title: " %>
-	<% title += strategy.title %>
-	<%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %>
+	<div class="content-item">
+		<% title = "Title: " %>
+		<% title += strategy.title %>
+		<div class="row">
+			<div class="large-10 columns">
+				<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %></h1>
+			</div>
+			<div class="large-2 columns clearfix">
+				<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
+				<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+			</div>
+		</div>
+		<%= label_tag(:author,"Author :" + strategy.user.name)  %>
+		<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
+	</div>
+
+<% end %>
 
 
-	<%= strategy.tech %>
-	<%= strategy.source %>
-	<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
-	<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+<p></p>
 
-	<%= label_tag(:author,"Author :" + strategy.user.name)  %>
-	<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
 
-	<p><%= puts strategy.inspect %></p>
+<%= form_tag({:controller => "strategies", :action => "search"}, {:method => "get"}) do %>
+	<%= label_tag "Numbers of results shown"%>
+	<%= select_tag :entry_number, options_for_select([["10", 10], ["30", 30], ["50", 50]], cookies[:page_entries]) %>
+ 	<%= hidden_field_tag :department, @dep %>
+	<%= hidden_field_tag :subject, @sub %>
+	<%= hidden_field_tag :keywords, @kwd %>
+	<%= hidden_field_tag :title, @tit %>
+	<%= hidden_field_tag :author, @aut %>
+	<%= hidden_field_tag :page, 1 %>
+	<%= submit_tag "Change number of entries show" %>
+<% end %>
 
-<%end%>
 
 <p></p>
 <%= link_to_if @page.to_i>1 , 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)} %>

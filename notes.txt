@@ -1,16 +1,11 @@
-General
-	Administrator creates list of approved departments and subjects
+5, 6
+Department of Computer Science
 
+7, 8
+Department of Physics
 
+5, 7
+Psychology
 
-Mitch
-	Need search on multiple attributes
-
-Jingwei
-	Need search for multiple keywords
-
-Scott
-	Search page should get list of depts and subjects from administrator's list
-
-Sally
-	Number of records per page should be able to be set by the user (higher default would be good, around 20-30)
+6, 8
+French
