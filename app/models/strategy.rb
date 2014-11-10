@@ -11,18 +11,18 @@ class Strategy < ActiveRecord::Base
 
 	def self.search(dep, sub, kwd, ttle, aut, page, entries_per_page)
 		
-		if dep && !dep.blank?
+		if dep && !dep.empty?
 		#the user does not actually choose a department
-			department = '%' + Department.find(dep).name + '%'
+			department = dep.collect { |d| Department.find(d).name }
 		else
-			department = '%%'
+			department = []
 		end
 
-		if sub && !sub.blank?
+		if sub && !sub.empty?
 		#the user does not actually choose a subject
-			subject = '%' + Subject.find(sub).name + '%'
+			subject = sub.collect { |s| Subject.find(s).name }
 		else
-			subject = '%%'
+			subject = []
 		end
 
 
@@ -60,6 +60,19 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-		find_by_sql( ["SELECT S.* FROM strategies S, users U#{sql_byKeyword} WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ?#{sql_order} LIMIT ? OFFSET ?", author, title, department, subject, entries_per_page, (page.to_i-1)*entries_per_page ])
+		query = ["SELECT S.* FROM strategies S, users U#{sql_byKeyword} " + 
+		         "WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id " + 
+		         "AND U.name LIKE ? AND S.title LIKE ? " + 
+		         "#{department.empty? ? '' : 'AND S.department IN (?) '}" + 
+		         "#{subject.empty? ? '' : 'AND S.subject IN (?)'}" + 
+		         "#{sql_order} LIMIT ? OFFSET ?"]
+		query += [author]
+		query += [title]
+		query += [department] unless department.empty?
+		query += [subject] unless subject.empty?
+		query += [entries_per_page]
+		query += [(page.to_i-1) * entries_per_page]
+		
+		find_by_sql(query)
 	end
 end

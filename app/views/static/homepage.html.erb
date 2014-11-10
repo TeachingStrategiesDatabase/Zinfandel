@@ -3,11 +3,11 @@
 <%= form_tag({controller:"strategies",action:"search"}, method:"get", class:"searchForm") do %>
 	<%= label_tag(:title, "Search Strategies") %>
 	<p></p>
-	<%= label_tag(:department ) %>
-	<%= select_tag(:department, options_for_select([["None", nil]] + @departmentList,1)) %>
+	<%= label_tag("Department (shift-click to select, ctrl-click to deselect)") %>
+	<%= select_tag(:department, options_for_select(@departmentList), :multiple => true) %>
 	<p></p>
-	<%= label_tag(:subject ) %>
-	<%= select_tag(:subject, options_for_select([["None", nil]] + @subjectList,1)) %>
+	<%= label_tag("Subject (shift-click to select, ctrl-click to deselect)" ) %>
+	<%= select_tag(:subject, options_for_select(@subjectList), :multiple => true) %>
 	<p></p>
 	<%= check_box_tag(:byKeywords) %>
 	<%= label_tag(:keywords) %>

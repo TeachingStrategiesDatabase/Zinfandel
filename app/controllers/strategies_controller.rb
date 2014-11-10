@@ -12,11 +12,14 @@ class StrategiesController < ApplicationController
 		@page = params[:page]
 		@page = '1' if not @page
 
-		@dep = params[:department]
+		@dep = params[:department] 
 		@sub = params[:subject]
 		@kwd = params[:keywords]
 		@tit = params[:title]
 		@aut = params[:author]
+
+		@dep = @dep.split(',') if @dep.class == String
+		@sub = @sub.split(',') if @sub.class == String
 
 		if params[:entry_number]
 			cookies[:page_entries] = params[:entry_number]
