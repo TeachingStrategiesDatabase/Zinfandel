@@ -1,7 +1,7 @@
 <!-- Specific strategy page -->
 
-<%= label_tag(:kwd, @AStrategy.keywords )  %>
-
-<p></p>
-
-<%= link_to 'HomePage', :controller => 'static', :action =>'homepage' %>
+<div class="content-item">
+	<h1><%= @AStrategy.title %></h1>
+	<p><%= @AStrategy.body %></p>
+	<%= link_to 'HomePage', :controller => 'static', :action =>'homepage' %>
+</div>
