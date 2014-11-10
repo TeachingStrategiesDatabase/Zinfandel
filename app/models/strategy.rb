@@ -1,5 +1,6 @@
 class Strategy < ActiveRecord::Base
 	belongs_to :user
+	has_many :keywordst
 	validates :title, presence: true,
                     length: { minimum: 3 }
     #validates :subject.to_i>1,
@@ -8,6 +9,10 @@ class Strategy < ActiveRecord::Base
 
     validates :body, presence: true,
                     length: { minimum: 10 }
+
+	def keywords
+		Keyword.where(:strategy_id => self.id)
+	end
 
 	def self.search(dep, sub, kwd, ttle, aut, page, entries_per_page)
 		

@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="large-12 columns">
 				<p><%= strategy.body[0, 150] + (strategy.body.length > 50 ? "..." : "") %>
-				<p><%= label_tag(:keywords, "Keywords: " + strategy.keywords )  %></p>
+				<p><%= label_tag(:keywords, "Keywords :" + strategy.keywords.map { |k| k.keyword }.join(', ') )  %></p>
 			</div>
 		</div>
 	</div>

@@ -48,13 +48,18 @@ class StrategiesController < ApplicationController
     
 # previous implementation of create
 	def create
+		@subjectList = Subject.getSubjectList()
+		@departmentList = Department.getDepartmentList()
 		@user = current_user
+
 		@strategy = @user.strategies.new(strategy_params)
+
 		@strategy.department = Department.find(params[:department].to_i).name
 		@strategy.subject = Subject.find(params[:subject].to_i).name
-#need to change department and subject from integer to string
+
  		if @strategy.save
-#need to add rows to keywords table
+ 			nextModelId = last_model_id()
+ 			addKeywords(@strategy.id, params[:keywords])
   			redirect_to root_path
   		else
 			@errors = @strategy.errors 
@@ -84,9 +89,26 @@ class StrategiesController < ApplicationController
         redirect_to :action => 'show'
 	end
 
+	def addKeywords(strategyId,keywords)
+		keywordList = keywords.split(/(?:,|\s)+/)
+		for keyword in keywordList
+  			@keyword = Keyword.new()
+  			@keyword.keyword = keyword
+  			@keyword.strategy_id = strategyId
+  			@keyword.save
+		end
+	end
+
+	def last_model_id
+    	lastModelList=ActiveRecord::Base.connection.execute('SELECT last_insert_rowid() as last_insert_rowid')
+    	lastModelHash = lastModelList[0]
+    	lastModelId = lastModelHash["last_insert_rowid"]
+    	lastModelId.to_i
+	end
+
 	private
         def strategy_params
-            params.require(:strategy).permit(:title, :body, :tech, :source)
+            params.require(:strategy).permit(:title, :body, :tech, :source, :department)
         end
 	
 	def entry_number

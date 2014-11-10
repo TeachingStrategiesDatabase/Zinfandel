@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108032550) do
+ActiveRecord::Schema.define(version: 20141110042429) do
 
   create_table "departments", force: true do |t|
     t.string "name"
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20141108032550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "keywords",   default: ""
     t.string   "department", default: ""
     t.string   "subject",    default: ""
   end
