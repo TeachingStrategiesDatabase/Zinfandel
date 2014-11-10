@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 	# before_filters go here, so that they are available to all controllers
 
 	def logged_in
-		redirect_to root_path, :notice => "You are not logged in." unless current_user
+		redirect_to login_path, :notice => "You are not logged in." unless current_user
 	end
 
 	def user_is_admin
