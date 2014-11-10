@@ -69,13 +69,18 @@ class StrategiesController < ApplicationController
 
     def edit
         @strategy = Strategy.find(params[:id])
+
+		@departmentList = Department.getDepartmentList
+		@departmentId = Department.find_by_name(@strategy.department).id
+		@subjectList = Subject.getSubjectList
+		@subjectId = Subject.find_by_name(@strategy.subject).id
     end
     
 	def update
         @strategy = Strategy.find(params[:id])
         
         if @strategy.update(strategy_params)
-            redirect_to @strategy
+            redirect_to root_path
         else
 			@errors = @strategy.errors
             render 'edit'
@@ -109,7 +114,9 @@ class StrategiesController < ApplicationController
 
 	private
         def strategy_params
-            params.require(:strategy).permit(:title, :body, :tech, :source, :department)
+			params[:strategy][:department] = Department.find(params[:department].to_i).name
+			params[:strategy][:subject] = Subject.find(params[:subject].to_i).name
+            params.require(:strategy).permit(:title, :body, :tech, :source, :department, :subject)
         end
 	
 	def entry_number
