@@ -1,31 +1,30 @@
 <!-- Home page view - searching and all that -->
 
-<%= form_tag({controller:"strategies",action:"search"}, method:"get", class:"searchForm") do %>
-	<%= label_tag(:title, "Search Strategies") %>
-	<p></p>
-	<%= label_tag(:department ) %>
-	<%= select_tag(:department, options_for_select([["None", nil]] + @departmentList,1)) %>
-	<p></p>
-	<%= label_tag(:subject ) %>
-	<%= select_tag(:subject, options_for_select([["None", nil]] + @subjectList,1)) %>
-	<p></p>
-	<%= check_box_tag(:byKeywords) %>
-	<%= label_tag(:keywords) %>
-	<%= text_field_tag(:keywords) %>
-	<p></p>
-	<%= check_box_tag(:byTitle) %>
-	<%= label_tag(:title) %>
-	<%= text_field_tag(:title) %>
-	<p></p>
-	<%= check_box_tag(:byAuthor) %>
-	<%= label_tag(:author) %>
-	<%= text_field_tag(:author) %>
+<div class="content-item">
+	<h1>Search Strategies</h1>
+		<%= form_tag({controller:"strategies",action:"search"}, method:"get", class:"searchForm") do %>
 
-	
-	<p></p>	
-	<%= submit_tag(:search) %>
-	<%= button_tag(:cancel,type:'reset') %>
-<%end%>
+		<%= label_tag(:department ) %>
+		<%= select_tag(:department, options_for_select([["Any", nil]] + @departmentList)) %>
+
+		<%= label_tag(:subject ) %>
+		<%= select_tag(:subject, options_for_select([["Any", nil]] + @subjectList)) %>
+
+		<%= label_tag(:keywords) %>
+		<%= text_field_tag(:keywords) %>
+
+		<%= label_tag(:title) %>
+		<%= text_field_tag(:title) %>
+
+		<%= label_tag(:author) %>
+		<%= text_field_tag(:author) %>
+
+		<%= submit_tag('Search', {:class => "button radius success"}) %>
+		<%= button_tag('Reset Form', {type: 'reset', :class => "button radius small"}) %>
+	<% end %>
 	
 
-<%= link_to 'Insert a strategy', :controller => 'strategies', :action =>'new' %>
+<% if current_user %>
+	<%= link_to 'share a strategy of your own', :controller => 'strategies', :action =>'new' %>
+<% end %>
+</div>
