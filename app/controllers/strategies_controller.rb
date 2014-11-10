@@ -77,6 +77,7 @@ class StrategiesController < ApplicationController
         if @strategy.update(strategy_params)
             redirect_to root_path
         else
+			@errors = @strategy.errors
             render 'edit'
         end
         
