@@ -77,4 +77,12 @@ class StrategiesController < ApplicationController
         def strategy_params
             params.require(:strategy).permit(:title, :body, :tech, :source)
         end
+	
+	def entry_number
+
+	@per_page = params[:per_page]
+	@strategy = Strategy.all.paginate :per_page => @per_page
+	end
+
+
 end
