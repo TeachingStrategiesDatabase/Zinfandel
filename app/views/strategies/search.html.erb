@@ -1,31 +1,33 @@
 <!-- Search result page - list results of search -->
 
-<% @currentPage.each do |strategy| %>
-	<div class="content-item">
-		<% title = "Title: " %>
-		<% title += strategy.title %>
-		<div class="row">
-			<div class="large-10 columns">
-				<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %></h1>
-				<p><small><%= label_tag(:author,"Author: <span class= \"author-name\">" + spanstrategy.user.name + "</span>")  %></small></p>
+<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
+	<% @currentPage.each do |strategy| %>
+	<li>
+		<div class="content-item">
+			<% title = "Title: " %>
+			<% title += strategy.title %>
+			<div class="row">
+				<div class="large-10 columns">
+					<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}, {:class => "strategy-title"}  %></h1>
+					<p><small>Author: <span class="author-name"><%= strategy.user.name %></span></small></p>
+				</div>
+				<div class="large-2 columns clearfix">
+					<% if current_user && (current_user.is_author?(strategy) || current_user.is_admin?) %>
+						<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %><br />
+						<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+					<% end %>
+				</div>
 			</div>
-			<div class="large-2 columns clearfix">
-				<% if current_user && (current_user.is_author?(strategy) || current_user.is_admin?) %>
-					<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
-					<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
-				<% end %>
+			<div class="row">
+				<div class="large-12 columns">
+					<p><%= strategy.body[0, 150] + (strategy.body.length > 150 ? "..." : "") %>
+					<p><%= label_tag(:keywords, "Keywords :" + strategy.keywords.map { |k| k.keyword }.join(', ') )  %></p>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="large-12 columns">
-				<p><%= strategy.body[0, 150] + (strategy.body.length > 50 ? "..." : "") %>
-				<p><%= label_tag(:keywords, "Keywords :" + strategy.keywords.map { |k| k.keyword }.join(', ') )  %></p>
-			</div>
-		</div>
-	</div>
-
-<% end %>
-
+	</li>
+	<% end %>
+</ul>
 
 <p></p>
 

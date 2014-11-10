@@ -96,6 +96,11 @@ form textarea {
 	margin: 0px 0px 1rem;
 }
 
+.strategy-title {
+	color: black;
+	text-decoration: underline;
+}
+
 .author-name {
 	text-decoration: underline;
 }

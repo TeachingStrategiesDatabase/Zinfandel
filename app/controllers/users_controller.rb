@@ -8,13 +8,19 @@ class UsersController < ApplicationController
 
 	def create
 # check to see that confirm_password == password before continuing
+	  @user = User.new(user_info_params)
 	  if params[:user][:confirm_password] != params[:user][:password]
-#		@errors = @users.errors
-			redirect_to :action => 'new'
+			@user.valid?
+		    @user.errors[:password] << ': Password and password confirmation must match.'
+			@errors = @user.errors
+			render 'new'
 	  else
-			@user = User.new(user_info_params)
-			@user.save
-			redirect_to root_path
+			if @user.save
+				redirect_to root_path
+			else
+				@errors = @user.errors
+				render 'new'
+			end
 	  end
 	end
 
