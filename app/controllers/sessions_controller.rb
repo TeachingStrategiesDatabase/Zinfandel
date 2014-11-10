@@ -5,6 +5,9 @@ class SessionsController < ApplicationController
 
 	def create
 		user = User.find_by_email(params[:email])
+		user = User.new unless user
+		if not params[:password].blank?
+
 		if user && user.verify_password(params[:password])
 			if user.log_in
 				if params[:forget_me_not]
@@ -19,10 +22,16 @@ class SessionsController < ApplicationController
 				flash[:error] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."
 			end
 		else
-			flash[:error] = "Invalid email/password combination. Please try again."
+			user.errors[:login] << ": Invalid email/password combination. Please try again."
 		end
 
-		redirect_to :action => 'new'
+		else
+			user.errors[:login] << ": You must provide a password."
+		end
+
+		@errors = user.errors
+
+		render 'new'
 	end
 
 	def destroy

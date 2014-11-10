@@ -1,17 +1,8 @@
 <!-- Insertion page - form for creating a new strategy -->
+<div class="content-item">
+<h1>Create a New Teaching Strategy</h1>
 <%= form_for :strategy,url: '/create' do |f| %>
-  <!--Check for error messages-->
-  <% if @strategy.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@strategy.errors.count, "error") %> prohibited
-      this article from being saved:</h2>
-    <ul>
-    <% @strategy.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
+  <%= render 'static/form_errors' %>
   <!--Display form-->
   <p>
     <%= f.label :title %><br>
@@ -24,18 +15,18 @@
   </p>
 
 	<p>
-		<%= f.label :keywords %><br>
-		<%= f.text_field :keywords %>
+		<%= label_tag :keywords, "Keywords (comma- or space-separated)" %><br>
+		<%= text_field_tag :keywords, params[:keywords] %>
 	</p>
 
 	<!-- Department and subject would go here -->
 	<p>
 		<%= label_tag :department %><br>
-		<%= select_tag :department, options_for_select(@departmentList,1) %>
+		<%= select_tag :department, options_for_select(@departmentList, params[:department]) %>
 	</p>
 	<p>
 		<%= label_tag :subject %><br>
-		<%= select_tag :subject, options_for_select(@subjectList,1) %>
+		<%= select_tag :subject, options_for_select(@subjectList, params[:subject]) %>
 	</p>
 
   <p>
@@ -44,6 +35,7 @@
   </p>
 
   <p>
-    <%= f.submit :"Submit Strategy" %>
+    <%= f.submit "Submit Strategy", :class => "button radius success" %>
   </p>
 <% end %>
+</div>
