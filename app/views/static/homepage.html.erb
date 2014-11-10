@@ -10,7 +10,7 @@
 		<%= label_tag("Subject (shift-click to select, ctrl-click to deselect)" ) %>
 		<%= select_tag(:subject, options_for_select([["Any", nil]] + @subjectList)) %>
 
-		<%= label_tag(:keywords) %>
+		<%= label_tag(:keywords, "Keywords (comma- or space-separated)") %>
 		<%= text_field_tag(:keywords) %>
 
 		<%= label_tag(:title) %>

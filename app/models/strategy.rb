@@ -10,6 +10,10 @@ class Strategy < ActiveRecord::Base
     validates :body, presence: true,
                     length: { minimum: 10 }
 
+	def keywords
+		Keyword.where(:strategy_id => self.id)
+	end
+
 	def self.search(dep, sub, kwd, ttle, aut, page, entries_per_page)
 		
 		if dep && !dep.empty?

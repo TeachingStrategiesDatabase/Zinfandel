@@ -24,27 +24,18 @@
   </p>
 
 	<p>
-		<%= f.label :keywords %><br>
-		<%= f.text_field :keywords %>
+		<%= label_tag :keywords, "Keywords (comma- or space-separated)" %><br>
+		<%= text_field_tag :keywords, params[:keywords] %>
 	</p>
 
 	<!-- Department and subject would go here -->
 	<p>
-<<<<<<< HEAD
-		<%= f.label :department %><br>
-		<%= f.select :department, options_for_select([["None", nil]] + @departmentList,1) %>
-	</p>
-	<p>
-		<%= f.label :subject %><br>
-		<%= f.select :subject, options_for_select([["None", nil]] + @subjectList,1) %>
-=======
 		<%= label_tag :department %><br>
-		<%= select_tag :department, options_for_select(@departmentList,1) %>
+		<%= select_tag :department, options_for_select(@departmentList, params[:department]) %>
 	</p>
 	<p>
 		<%= label_tag :subject %><br>
-		<%= select_tag :subject, options_for_select(@subjectList,1) %>
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
+		<%= select_tag :subject, options_for_select(@subjectList, params[:subject]) %>
 	</p>
 
   <p>

@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		<%= label_tag(:author,"Author :" + strategy.user.name)  %>
-		<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
+		<%= label_tag(:keywords, "Keywords :" + strategy.keywords.map { |k| k.keyword }.join(', ') )  %>
 	</div>
 
 <% end %>

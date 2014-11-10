@@ -52,18 +52,13 @@ class StrategiesController < ApplicationController
 		@user = current_user
 
 		@strategy = @user.strategies.new(strategy_params)
-<<<<<<< HEAD
-		@strategy.subject = numToName(@strategy.subject,@subjectList)
-		@strategy.department = numToName(@strategy.department,@departmentList)
 
-=======
 		@strategy.department = Department.find(params[:department].to_i).name
 		@strategy.subject = Subject.find(params[:subject].to_i).name
-#need to change department and subject from integer to string
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
+
  		if @strategy.save
  			nextModelId = last_model_id()
- 			addKeywords(nextModelId,@strategy.keywords)
+ 			addKeywords(@strategy.id, params[:keywords])
   			redirect_to root_path
   		else
 			@errors = @strategy.errors 
@@ -93,16 +88,6 @@ class StrategiesController < ApplicationController
         redirect_to :action => 'show'
 	end
 
-	def numToName(intString,departmentList)
-		if (intString==nil)
-			return nil
-		else
-			theInt = intString.to_i-1
-			theList = departmentList[theInt]
-			returnVal = theList[0]
-		end
-	end
-
 	def addKeywords(strategyId,keywords)
 		keywordList = keywords.split(/(?:,|\s)+/)
 		for keyword in keywordList
@@ -122,7 +107,7 @@ class StrategiesController < ApplicationController
 
 	private
         def strategy_params
-            params.require(:strategy).permit(:title, :body, :tech, :source,:department,:keywords)
+            params.require(:strategy).permit(:title, :body, :tech, :source, :department)
         end
 	
 	def entry_number
