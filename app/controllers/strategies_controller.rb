@@ -39,8 +39,8 @@ class StrategiesController < ApplicationController
 	def create
 		@user = current_user
 		@strategy = @user.strategies.new(strategy_params)
-		@strategy.department = numToName(@departmentList,@strategy.department)
-		@strategy.subject = numToName(@subjectList,@strategy.subject)
+		@strategy.department = Department.find(params[:department].to_i).name
+		@strategy.subject = Subject.find(params[:subject].to_i).name
 #need to change department and subject from integer to string
  		if @strategy.save
 #need to add rows to keywords table
