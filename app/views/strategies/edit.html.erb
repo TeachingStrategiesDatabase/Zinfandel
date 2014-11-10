@@ -26,6 +26,10 @@
 <%= f.text_area :source %>
 </p>
 
+<%= f.label :keywords, "Keywords (comma- or space-separated)" %><br>
+<%= f.text_field :keywords , :value =>@strategy.keywords.map { |k| k.keyword }.join(', ')  %>
+
+
 <p>
 <%= f.submit "Save Changes", :class => "button radius success" %>
 </p>

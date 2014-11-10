@@ -1,11 +1,8 @@
 class Strategy < ActiveRecord::Base
 	belongs_to :user
-<<<<<<< HEAD
 
-	#has_many :keywords
-=======
 	has_many :keywordst
->>>>>>> 8e6480efc5c7b13b22d56e1de2cd4884cbe7c383
+
 	validates :title, presence: true,
                     length: { minimum: 3 }
     #validates :subject.to_i>1,
@@ -17,6 +14,11 @@ class Strategy < ActiveRecord::Base
 
 	def keywords
 		Keyword.where(:strategy_id => self.id)
+	end
+	
+	def self.setKeywords(kwd)
+		newKeywords = kwd.split(/(?:,|\s)+/)
+		Keyword.setKeywordsByStrategy(self.id,newKeywords)
 	end
 
 	def self.search(dep, sub, kwd, ttle, aut, page, entries_per_page)
@@ -69,11 +71,7 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-<<<<<<< HEAD
 
-		find_by_sql( ["SELECT S.* FROM strategies S, users U#{sql_byKeyword} WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ?#{sql_order} LIMIT ? OFFSET ?", author, title, department, subject, 2, (page.to_i-1)*2 ])
-
-=======
 		query = ["SELECT S.* FROM strategies S, users U#{sql_byKeyword} " + 
 		         "WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id " + 
 		         "AND U.name LIKE ? AND S.title LIKE ? " + 
@@ -88,6 +86,6 @@ class Strategy < ActiveRecord::Base
 		query += [(page.to_i-1) * entries_per_page]
 		
 		find_by_sql(query)
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
+
 	end
 end

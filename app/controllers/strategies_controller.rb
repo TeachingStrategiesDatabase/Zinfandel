@@ -55,16 +55,12 @@ class StrategiesController < ApplicationController
 		@strategy = @user.strategies.new(strategy_params)
 
 		@strategy.department = Department.find(params[:department].to_i).name
-<<<<<<< HEAD
-		@strategy.subject = Subject.find(params[:department].to_i).name
-=======
-		@strategy.subject = Subject.find(params[:subject].to_i).name
-<<<<<<< HEAD
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
-#need to change department and subject from integer to string
-=======
 
->>>>>>> 8e6480efc5c7b13b22d56e1de2cd4884cbe7c383
+		@strategy.subject = Subject.find(params[:subject].to_i).name
+
+#need to change department and subject from integer to string
+
+
  		if @strategy.save
  			nextModelId = last_model_id()
  			addKeywords(@strategy.id, params[:keywords])
@@ -82,8 +78,8 @@ class StrategiesController < ApplicationController
 	def update
         @strategy = Strategy.find(params[:id])
         
-        if @strategy.update(strategy_params)
-            redirect_to @strategy
+        if (@strategy.update(strategy_params) && Strategy.setKeywords(params[:keywords]) )
+            redirect_to root_path
         else
             render 'edit'
         end
@@ -118,8 +114,7 @@ class StrategiesController < ApplicationController
         def strategy_params
             params.require(:strategy).permit(:title, :body, :tech, :source, :department)
         end
-<<<<<<< HEAD
-=======
+
 	
 	def entry_number
 
@@ -128,5 +123,4 @@ class StrategiesController < ApplicationController
 	end
 
 
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
 end
