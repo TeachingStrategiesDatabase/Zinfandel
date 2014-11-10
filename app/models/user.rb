@@ -12,12 +12,19 @@ class User < ActiveRecord::Base
 	end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def is_author(strategy)
 		self.id==strategy.user.id
 	end
 
 =======
 >>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
+=======
+	def is_author?(strategy)
+		self.id == strategy.user.id
+	end
+
+>>>>>>> 8e6480efc5c7b13b22d56e1de2cd4884cbe7c383
 	def log_in
 		self.session_token = SecureRandom.base64
 		self.save

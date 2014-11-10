@@ -2,7 +2,8 @@ class StrategiesController < ApplicationController
 
 	PAGE_ENTRIES_DEFAULT = 20
 
-	before_filter :logged_in, :only => [:new, :create, :update, :destroy]
+	before_filter :logged_in, :only => [:new, :create, :edit, :update, :destroy]
+	before_filter :user_owns_strategy, :only => [:edit, :update, :destroy]
 
 	def show
 		@AStrategy = Strategy.find(params[:id])
@@ -47,17 +48,26 @@ class StrategiesController < ApplicationController
     
 # previous implementation of create
 	def create
+		@subjectList = Subject.getSubjectList()
+		@departmentList = Department.getDepartmentList()
 		@user = current_user
+
 		@strategy = @user.strategies.new(strategy_params)
+
 		@strategy.department = Department.find(params[:department].to_i).name
 <<<<<<< HEAD
 		@strategy.subject = Subject.find(params[:department].to_i).name
 =======
 		@strategy.subject = Subject.find(params[:subject].to_i).name
+<<<<<<< HEAD
 >>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
 #need to change department and subject from integer to string
+=======
+
+>>>>>>> 8e6480efc5c7b13b22d56e1de2cd4884cbe7c383
  		if @strategy.save
-#need to add rows to keywords table
+ 			nextModelId = last_model_id()
+ 			addKeywords(@strategy.id, params[:keywords])
   			redirect_to root_path
   		else
 			@errors = @strategy.errors 
@@ -87,9 +97,26 @@ class StrategiesController < ApplicationController
         redirect_to :action => 'show'
 	end
 
+	def addKeywords(strategyId,keywords)
+		keywordList = keywords.split(/(?:,|\s)+/)
+		for keyword in keywordList
+  			@keyword = Keyword.new()
+  			@keyword.keyword = keyword
+  			@keyword.strategy_id = strategyId
+  			@keyword.save
+		end
+	end
+
+	def last_model_id
+    	lastModelList=ActiveRecord::Base.connection.execute('SELECT last_insert_rowid() as last_insert_rowid')
+    	lastModelHash = lastModelList[0]
+    	lastModelId = lastModelHash["last_insert_rowid"]
+    	lastModelId.to_i
+	end
+
 	private
         def strategy_params
-            params.require(:strategy).permit(:title, :body, :tech, :source)
+            params.require(:strategy).permit(:title, :body, :tech, :source, :department)
         end
 <<<<<<< HEAD
 =======

@@ -1,49 +1,41 @@
 <!-- Search result page - list results of search -->
 
-<% @currentPage.each do |strategy| %>
-	<div class="content-item">
-		<% title = "Title: " %>
-		<% title += strategy.title %>
-		<div class="row">
-			<div class="large-10 columns">
-				<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}  %></h1>
+<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
+	<% @currentPage.each do |strategy| %>
+	<li>
+		<div class="content-item">
+			<% title = "Title: " %>
+			<% title += strategy.title %>
+			<div class="row">
+				<div class="large-10 columns">
+					<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}, {:class => "strategy-title"}  %></h1>
+					<p><small>Author: <span class="author-name"><%= strategy.user.name %></span></small></p>
+				</div>
+				<div class="large-2 columns clearfix">
+					<% if current_user && (current_user.is_author?(strategy) || current_user.is_admin?) %>
+						<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %><br />
+						<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+					<% end %>
+				</div>
 			</div>
-			<div class="large-2 columns clearfix">
-				<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %>
-				<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
+			<div class="row">
+				<div class="large-12 columns">
+					<p><%= strategy.body[0, 150] + (strategy.body.length > 150 ? "..." : "") %>
+					<p><%= label_tag(:keywords, "Keywords :" + strategy.keywords.map { |k| k.keyword }.join(', ') )  %></p>
+				</div>
 			</div>
 		</div>
-		<%= label_tag(:author,"Author :" + strategy.user.name)  %>
-		<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
-	</div>
-
-<% end %>
-
+	</li>
+	<% end %>
+</ul>
 
 <p></p>
 
-<<<<<<< HEAD
-	<%= strategy.tech %>
-	<%= strategy.source %>
 
-	<% if (current_user && current_user.is_author(strategy)) %>
-		<%= link_to "Update", {:controller => "strategies", :action =>"edit", :id=> strategy.id}   %>
-		<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id,  data: { confirm: 'Are you sure?' } %>
-	<% end %>
-	
-
-
-	<%= label_tag(:author,"Author :" + strategy.user.name)  %>
-	<%= label_tag(:keywords, "Keywords :" + strategy.keywords )  %>
-
-	<p><%= puts strategy.inspect %></p>
-
-<%end%>
-=======
 
 <%= form_tag({:controller => "strategies", :action => "search"}, {:method => "get"}) do %>
 	<%= label_tag "Numbers of results shown"%>
-	<%= select_tag :entry_number, options_for_select([["10", 10], ["30", 30], ["50", 50]], cookies[:page_entries]) %>
+	<%= select_tag :entry_number, options_for_select([["10", 10], ["11", 11], ["20", 20], ["30", 30], ["40", 40], ["50", 50], ["100", 100]], cookies[:page_entries]) %>
  	<%= hidden_field_tag :department, @dep %>
 	<%= hidden_field_tag :subject, @sub %>
 	<%= hidden_field_tag :keywords, @kwd %>
@@ -53,7 +45,7 @@
 	<%= submit_tag "Change number of entries show" %>
 <% end %>
 
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
+
 
 <p></p>
 <%= link_to_if @page.to_i>1 , 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)} %>

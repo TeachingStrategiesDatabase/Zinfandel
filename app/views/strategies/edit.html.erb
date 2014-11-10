@@ -1,20 +1,11 @@
 <!-- show the record to update it -->
 
-
-<p> Update Specific Strategy: </p>
+<div class="content-item">
+<h1>Update Strategy</h1>
 
 <%= form_for :strategy, url: strategy_update_path(@strategy), method: :patch do |f| %>
-<% if @strategy.errors.any? %>
-<div id="error_explanation">
-<h2><%= pluralize(@strategy.errors.count, "error") %> prohibited
-this article from being saved:</h2>
-<ul>
-<% @strategy.errors.full_messages.each do |msg| %>
-<li><%= msg %></li>
-<% end %>
-</ul>
-</div>
-<% end %>
+<%= render 'static/form_errors' %>
+
 <p>
 <%= f.label :title %><br>
 <%= f.text_field :title %>
@@ -36,6 +27,8 @@ this article from being saved:</h2>
 </p>
 
 <p>
-<%= f.submit %>
+<%= f.submit "Save Changes", :class => "button radius success" %>
 </p>
 <% end %>
+
+</div>
