@@ -24,10 +24,17 @@
 <p></p>
 
 
-#<%f.label "Numbers of results shown"%>
-#<%= f.select :entry_number, options_for_select([["10", "30", "50"]], @link.strategies %>
-
-#<%= will_paginate @strategy %>
+<%= form_tag({:controller => "strategies", :action => "search"}, {:method => "get"}) do %>
+	<%= label_tag "Numbers of results shown"%>
+	<%= select_tag :entry_number, options_for_select([["10", 10], ["30", 30], ["50", 50]], cookies[:page_entries]) %>
+ 	<%= hidden_field_tag :department, @dep %>
+	<%= hidden_field_tag :subject, @sub %>
+	<%= hidden_field_tag :keywords, @kwd %>
+	<%= hidden_field_tag :title, @tit %>
+	<%= hidden_field_tag :author, @aut %>
+	<%= hidden_field_tag :page, 1 %>
+	<%= submit_tag "Change number of entries show" %>
+<% end %>
 
 
 <p></p>

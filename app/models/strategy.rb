@@ -9,7 +9,7 @@ class Strategy < ActiveRecord::Base
     validates :body, presence: true,
                     length: { minimum: 10 }
 
-	def self.search(dep,sub,kwd,ttle,aut,page)
+	def self.search(dep, sub, kwd, ttle, aut, page, entries_per_page)
 		
 		if dep && !dep.blank?
 		#the user does not actually choose a department
@@ -60,6 +60,6 @@ class Strategy < ActiveRecord::Base
 		end
 		
 
-		find_by_sql( ["SELECT S.* FROM strategies S, users U#{sql_byKeyword} WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ?#{sql_order} LIMIT ? OFFSET ?", author, title, department, subject, 2, (page.to_i-1)*2 ])
+		find_by_sql( ["SELECT S.* FROM strategies S, users U#{sql_byKeyword} WHERE #{sql_byKeyword.blank? ? '' : 'S.id = K.strategy_id AND '}S.user_id = U.id AND U.name LIKE ? AND S.title LIKE ? AND S.department LIKE ? AND S.subject LIKE ?#{sql_order} LIMIT ? OFFSET ?", author, title, department, subject, entries_per_page, (page.to_i-1)*entries_per_page ])
 	end
 end
