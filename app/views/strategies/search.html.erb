@@ -18,6 +18,16 @@
 
 <%end%>
 
+
+<p></p>
+
+
+#<%f.label "Numbers of results shown"%>
+#<%= f.select :entry_number, options_for_select([["10", "30", "50"]], @link.strategies %>
+
+<%= will_paginate @strategy %>
+
+
 <p></p>
 <%= link_to_if @page.to_i>1 , 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)} %>
 
