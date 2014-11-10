@@ -95,3 +95,7 @@ form select {
 form textarea {
 	margin: 0px 0px 1rem;
 }
+
+.author-name {
+	text-decoration: underline;
+}
