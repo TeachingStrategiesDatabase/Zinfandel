@@ -9,14 +9,11 @@ class Keyword < ActiveRecord::Base
 	end
 
 	def self.setKeywordsByStrategy(strategyId,newKeywords)
-		sql_delete = "DELETE FROM keywords WHERE strategy_id = ?" 
-		sql_delete += [strategyId] 
+		sql_delete = "DELETE FROM keywords WHERE strategy_id = #{strategyId}"
 		connection.execute(sql_delete)
 		
 		newKeywords.each do |k|
-			sql_insert = "INSERT INTO keywords(strategy_id, keyword) VALUES(?,?)"
-			sql_insert += [strategyId]
-			sql_insert += [k]
+			sql_insert = "INSERT INTO keywords(strategy_id, keyword) VALUES(#{strategyId},'#{k}')"
 			connection.execute(sql_insert)
 		end
 

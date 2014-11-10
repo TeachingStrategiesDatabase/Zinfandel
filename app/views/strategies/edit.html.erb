@@ -26,8 +26,8 @@
 <%= f.text_area :source %>
 </p>
 
-<%= f.label :keywords, "Keywords (comma- or space-separated)" %><br>
-<%= f.text_field :keywords , :value =>@strategy.keywords.map { |k| k.keyword }.join(', ')  %>
+<%= label_tag :keywords, "Keywords (comma- or space-separated)" %><br>
+<%= text_field_tag :keywords , @strategy.keywords.map { |k| k.keyword }.join(', ')  %>
 
 
 <p>

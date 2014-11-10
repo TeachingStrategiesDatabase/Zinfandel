@@ -78,7 +78,7 @@ class StrategiesController < ApplicationController
 	def update
         @strategy = Strategy.find(params[:id])
         
-        if (@strategy.update(strategy_params) && Strategy.setKeywords(params[:keywords]) )
+        if (@strategy.update(strategy_params) && @strategy.setKeywords(params[:keywords]) )
             redirect_to root_path
         else
             render 'edit'

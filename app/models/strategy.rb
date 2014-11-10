@@ -1,7 +1,7 @@
 class Strategy < ActiveRecord::Base
 	belongs_to :user
 
-	has_many :keywordst
+	has_many :keywords
 
 	validates :title, presence: true,
                     length: { minimum: 3 }
@@ -16,7 +16,7 @@ class Strategy < ActiveRecord::Base
 		Keyword.where(:strategy_id => self.id)
 	end
 	
-	def self.setKeywords(kwd)
+	def setKeywords(kwd)
 		newKeywords = kwd.split(/(?:,|\s)+/)
 		Keyword.setKeywordsByStrategy(self.id,newKeywords)
 	end
