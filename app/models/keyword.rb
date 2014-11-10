@@ -4,8 +4,9 @@ class Keyword < ActiveRecord::Base
 		connection.select_all("SELECT name, id FROM keywords").rows
 	end
 
-	def self.insertSubject(subjectName)
-		connection.execute("INSERT INTO subjects(name) VAlUES (\'" + subjectName + "\')")
+	def self.getKeywordsByStrategy(strategyId)
+		connection.execute("SELECT keyword FROM keywords WHERE strategy_id=" + strategyId.to_s + ";")
 	end
+
 
 end
