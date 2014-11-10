@@ -1,5 +1,7 @@
 class StrategiesController < ApplicationController
 
+	PAGE_ENTRIES_DEFAULT = 20
+
 	before_filter :logged_in, :only => [:new, :create, :update, :destroy]
 
 	def show
@@ -10,14 +12,22 @@ class StrategiesController < ApplicationController
 		@page = params[:page]
 		@page = '1' if not @page
 
-		@dep = params[:department]
+		@dep = params[:department] 
 		@sub = params[:subject]
 		@kwd = params[:keywords]
 		@tit = params[:title]
 		@aut = params[:author]
-		
-		@currentPage = Strategy.search(params[:department],params[:subject],params[:keywords],params[:title],params[:author],@page)
-		if @currentPage.size<2
+
+		@dep = @dep.split(',') if @dep.class == String
+		@sub = @sub.split(',') if @sub.class == String
+
+		if params[:entry_number]
+			cookies[:page_entries] = params[:entry_number]
+		end
+	
+		entries_per_page = cookies[:page_entries].to_i || PAGE_ENTRIES_DEFAULT	
+		@currentPage = Strategy.search(params[:department],params[:subject],params[:keywords],params[:title],params[:author], @page, entries_per_page)
+		if @currentPage.size < entries_per_page
 			@notLastPage = false
 		else
 			@notLastPage = true
@@ -80,8 +90,8 @@ class StrategiesController < ApplicationController
 	
 	def entry_number
 
-	@per_page = params[:per_page]
-	@strategy = Strategy.all.paginate :per_page => @per_page
+		@per_page = params[:per_page]
+		@strategy = Strategy.all.paginate :per_page => @per_page
 	end
 
 

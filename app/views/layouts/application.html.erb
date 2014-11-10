@@ -8,11 +8,15 @@
 </head>
 <body>
 
-<%= render 'static/header' %>
+<header class="site-header">
+	<%= render 'static/header' %>
+</header>
 
 <%= yield %>
 
-<%= render 'static/footer' %>
+<footer>
+	<%= render 'static/footer' %>
+</footer>
 
 </body>
 </html>

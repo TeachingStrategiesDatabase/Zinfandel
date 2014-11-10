@@ -1,3 +1,3 @@
 <!-- Information on the current user -->
-<p>Welcome, <%= current_user.name %>!</p>
-<p><%= link_to "Log out of Zinfandel", logout_path %></p>
+<p><strong>Welcome, <%= current_user.name %>!</strong></p>
+<p><%= link_to('Go To Site Administration', admin_path, {:class => "link"}) if current_user.is_admin? %></p>
