@@ -1,7 +1,7 @@
 class Strategy < ActiveRecord::Base
 	belongs_to :user
 
-	has_many :keywords
+	has_many :keywordst
 
 	validates :title, presence: true,
                     length: { minimum: 3 }
@@ -38,8 +38,8 @@ class Strategy < ActiveRecord::Base
 		end
 
 
-		keywords = kwd.split(/(?:,|\s)+/) if kwd
-		if keywords.nil? || keywords ==[]
+		keywords = kwd.split(/(?:,|\s)+/)
+		if keywords ==[]
 			keywords = ['%%']
 			sql_byKeyword = ''
 			sql_order = ''

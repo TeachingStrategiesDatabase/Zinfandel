@@ -25,6 +25,14 @@
 <%= f.label :source %><br>
 <%= f.text_area :source %>
 
+<<<<<<< HEAD
+=======
+<%= label_tag :keywords, "Keywords (comma- or space-separated)" %><br>
+<%= text_field_tag :keywords , @strategy.keywords.map { |k| k.keyword }.join(', ')  %>
+
+
+<p>
+>>>>>>> jingwei
 <%= f.submit "Save Changes", :class => "button radius success" %>
 <% end %>
 

@@ -32,6 +32,7 @@
 <p></p>
 
 
+
 <%= form_tag({:controller => "strategies", :action => "search"}, {:method => "get"}) do %>
 	<%= label_tag "Numbers of results shown"%>
 	<%= select_tag :entry_number, options_for_select([["10", 10], ["11", 11], ["20", 20], ["30", 30], ["40", 40], ["50", 50], ["100", 100]], cookies[:page_entries]) %>
@@ -43,6 +44,7 @@
 	<%= hidden_field_tag :page, 1 %>
 	<%= submit_tag "Change number of entries show" %>
 <% end %>
+
 
 
 <p></p>

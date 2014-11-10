@@ -36,8 +36,8 @@ class StrategiesController < ApplicationController
 	end
 
 	def new
-		@departmentList = Department.getDepartmentList()
-		@subjectList = Subject.getSubjectList()
+		@departmentList = Department.departmentsForSelect
+		@subjectList = Subject.subjectsForSelect
 
 		@strategy = Strategy.new
 	end
@@ -55,7 +55,11 @@ class StrategiesController < ApplicationController
 		@strategy = @user.strategies.new(strategy_params)
 
 		@strategy.department = Department.find(params[:department].to_i).name
+
 		@strategy.subject = Subject.find(params[:subject].to_i).name
+
+#need to change department and subject from integer to string
+
 
  		if @strategy.save
  			nextModelId = last_model_id()
@@ -79,7 +83,7 @@ class StrategiesController < ApplicationController
 	def update
         @strategy = Strategy.find(params[:id])
         
-        if @strategy.update(strategy_params)
+        if (@strategy.update(strategy_params) && @strategy.setKeywords(params[:keywords]) )
             redirect_to root_path
         else
 			@errors = @strategy.errors
@@ -118,6 +122,7 @@ class StrategiesController < ApplicationController
 			params[:strategy][:subject] = Subject.find(params[:subject].to_i).name
             params.require(:strategy).permit(:title, :body, :tech, :source, :department, :subject)
         end
+
 	
 	def entry_number
 
