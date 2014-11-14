@@ -59,3 +59,6 @@ notes.txt
 
 # Ignore application secreeeeets
 /config/application.yml
+
+# Ignore public assets for testing purposes
+/public/assets/
