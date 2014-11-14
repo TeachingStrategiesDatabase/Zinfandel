@@ -4,7 +4,7 @@
     <h2><%= pluralize(@errors.count, "error") %> prohibited
       this form from being sent:</h2>
     <ul>
-    <% @errors.full_messages.each do |msg| %>
+    <% @errors.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

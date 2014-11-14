@@ -66,7 +66,7 @@ class StrategiesController < ApplicationController
  			addKeywords(@strategy.id, params[:keywords])
   			redirect_to root_path
   		else
-			@errors = @strategy.errors 
+			@errors = @strategy.errors.full_messages
   			render "new"
   		end
 	end
@@ -86,7 +86,7 @@ class StrategiesController < ApplicationController
         if (@strategy.update(strategy_params) && @strategy.setKeywords(params[:keywords]) )
             redirect_to root_path
         else
-			@errors = @strategy.errors
+			@errors = @strategy.errors.full_messages
             render 'edit'
         end
         

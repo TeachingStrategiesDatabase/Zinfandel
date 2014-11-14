@@ -5,31 +5,29 @@ class SessionsController < ApplicationController
 
 	def create
 		user = User.find_by_email(params[:email])
-		user = User.new unless user
+		@errors = []
+
 		if not params[:password].blank?
+			if user && user.verify_password(params[:password])
+				if user.log_in
+					if params[:forget_me_not]
+						cookies.permanent[:sid] = user.session_token
+					else
+						cookies[:sid] = user.session_token
+					end
+					redirect_to root_path
+					return
 
-		if user && user.verify_password(params[:password])
-			if user.log_in
-				if params[:forget_me_not]
-					cookies.permanent[:sid] = user.session_token
 				else
-					cookies[:sid] = user.session_token
+					flash[:error] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."
 				end
-				redirect_to root_path
-				return
-
 			else
-				flash[:error] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."
+
+				@errors << "Invalid email/password combination. Please try again."
 			end
 		else
-			user.errors[:login] << ": Invalid email/password combination. Please try again."
+			@errors << "You must provide a password."
 		end
-
-		else
-			user.errors[:login] << ": You must provide a password."
-		end
-
-		@errors = user.errors
 
 		render 'new'
 	end

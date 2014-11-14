@@ -12,13 +12,13 @@ class UsersController < ApplicationController
 	  if params[:user][:confirm_password] != params[:user][:password]
 			@user.valid?
 		    @user.errors[:password] << ': Password and password confirmation must match.'
-			@errors = @user.errors
+			@errors = @user.errors.full_messages
 			render 'new'
 	  else
 			if @user.save
 				redirect_to root_path
 			else
-				@errors = @user.errors
+				@errors = @user.errors.full_messages
 				render 'new'
 			end
 	  end

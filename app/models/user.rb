@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
 
 	has_many :strategies
 
-	#validates :email, :presence => true
-	#validates :email, :with => { :format => /.+@.+\..+/ }
+	validates :email, presence: true
+	validates :email, :format => { :with => /.+@.+\..+/ }
 
 	def is_admin?
 		self.admin
