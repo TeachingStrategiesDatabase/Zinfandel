@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 	  else
 			if @user.save
 				@user.log_in
+				cookies[:sid] = @user.session_token
 				redirect_to root_path
 			else
 				@errors = @user.errors.full_messages

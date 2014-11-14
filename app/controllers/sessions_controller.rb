@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
 					return
 
 				else
-					flash[:error] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."
+					flash[:danger] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."
 				end
 			else
 
@@ -35,6 +35,7 @@ class SessionsController < ApplicationController
 	def destroy
 		current_user.log_out if current_user
 		cookies.delete(:sid)
+		flash[:success] = "You have been logged out."
 		redirect_to root_path
 	end
 
