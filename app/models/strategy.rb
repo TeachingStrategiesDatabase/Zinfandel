@@ -47,7 +47,7 @@ class Strategy < ActiveRecord::Base
 
 			sql_byKeyword = ", (SELECT strategy_id, COUNT(*) AS relevance FROM keywords WHERE keyword LIKE "
 			keywords.each do |k|
-				sql_byKeyword = sql_byKeyword + '\'' + k + '\' OR keyword LIKE'
+				sql_byKeyword = sql_byKeyword + '\'%' + k + '%\' OR keyword LIKE'
 			end
 
 #the length of string ' OR keyword LIKE' is 15

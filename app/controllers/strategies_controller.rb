@@ -94,9 +94,14 @@ class StrategiesController < ApplicationController
         
 	def destroy
         
-        @strategy = Strategy.find(params[:id])
-        @strategy.destroy
-        redirect_to :action => "search", :department=> params[:department], :subject => params[:subject], :keywords => params[:keywords], :title => params[:title], :author => params[:author], :page => params[:page]
+       		@strategy = Strategy.find(params[:id])
+        	if( @strategy.destroy && @strategy.setKeywords(''))
+		#do nothing
+		else
+			@errors = @strategy.errors
+        	end
+        	redirect_to :action => "search", :department=> params[:department], :subject => params[:subject], :keywords => params[:keywords], :title => params[:title], :author => params[:author], :page => params[:page]
+		
 	end
 
 	def addKeywords(strategyId,keywords)
