@@ -1,5 +1,14 @@
 <!-- Search result page - list results of search -->
 
+<% if @page=='1' && @currentPage.size==0  %>
+	<%= "No strategies were found\n" %>
+	<%= "Suggestions:\n" %>
+	<%= "Make sure all words are spelled correctly.\n" %>
+	<%= "Try different keywords.\n" %>
+	<%= "Try more general keywords.\n" %>
+	<%= "Try fewer keywords.\n" %>
+<% end %>
+
 <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
 	<% @currentPage.each do |strategy| %>
 	<li>
