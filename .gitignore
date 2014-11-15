@@ -56,3 +56,9 @@ build/
 # ignore my notes!
 css_notes.txt
 notes.txt
+
+# Ignore application secreeeeets
+/config/application.yml
+
+# Ignore public assets for testing purposes
+/public/assets/

@@ -26,7 +26,7 @@ class StrategiesController < ApplicationController
 			cookies[:page_entries] = params[:entry_number]
 		end
 	
-		entries_per_page = cookies[:page_entries].to_i || PAGE_ENTRIES_DEFAULT	
+		entries_per_page = !cookies[:page_entries].blank? ? cookies[:page_entries].to_i : PAGE_ENTRIES_DEFAULT	
 		@currentPage = Strategy.search(params[:department],params[:subject],params[:keywords],params[:title],params[:author], @page, entries_per_page)
 		if @currentPage.size < entries_per_page
 			@notLastPage = false
@@ -66,7 +66,7 @@ class StrategiesController < ApplicationController
  			addKeywords(@strategy.id, params[:keywords])
   			redirect_to root_path
   		else
-			@errors = @strategy.errors 
+			@errors = @strategy.errors.full_messages
   			render "new"
   		end
 	end
@@ -86,7 +86,7 @@ class StrategiesController < ApplicationController
         if (@strategy.update(strategy_params) && @strategy.setKeywords(params[:keywords]) )
             redirect_to root_path
         else
-			@errors = @strategy.errors
+			@errors = @strategy.errors.full_messages
             render 'edit'
         end
         

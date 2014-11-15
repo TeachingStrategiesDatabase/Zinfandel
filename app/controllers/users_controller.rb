@@ -9,16 +9,23 @@ class UsersController < ApplicationController
 	def create
 # check to see that confirm_password == password before continuing
 	  @user = User.new(user_info_params)
-	  if params[:user][:confirm_password] != params[:user][:password]
+	  if !validate_password(params[:user][:password])
+		  	@user.valid?
+			@user.errors[:password] << 'must be at least six characters.'
+			@errors = @user.errors.full_messages
+			render 'new'
+	  elsif params[:user][:confirm_password] != params[:user][:password]
 			@user.valid?
-		    @user.errors[:password] << ': Password and password confirmation must match.'
-			@errors = @user.errors
+		    @user.errors[:password] << 'and password confirmation must match.'
+			@errors = @user.errors.full_messages
 			render 'new'
 	  else
 			if @user.save
+				@user.log_in
+				cookies[:sid] = @user.session_token
 				redirect_to root_path
 			else
-				@errors = @user.errors
+				@errors = @user.errors.full_messages
 				render 'new'
 			end
 	  end
@@ -62,5 +69,13 @@ class UsersController < ApplicationController
 	    params[:user][:name] = params[:user][:first_name] + ' ' + params[:user][:last_name]
    	   params.require(:user).permit(:name, :email, :password)
  	 end
+
+	def validate_password(password)
+		if password.blank? || (password.length < 6)
+			false
+		else
+			true
+		end
+	end
 
 end

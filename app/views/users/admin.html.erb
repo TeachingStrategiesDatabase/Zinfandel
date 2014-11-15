@@ -1,21 +1,6 @@
 <% dept_string = @departments.collect { |d| d.name }.join(', ') %>
 <% subj_string = @subjects.collect { |s| s.name }.join(', ') %>
 
-<<<<<<< HEAD
-<h1>Adminstration</h1>
-
-<%= form_tag admin_update_path, :method => :put do %>
-
-	<%= label_tag 'Update Available Departments' %>
-	<%= text_area_tag :departments, dept_string %>
-
-	<%= label_tag 'Update Available Subjects' %>
-	<%= text_area_tag :subjects, subj_string %>
-
-	<%= submit_tag 'Update' %>
-
-<% end %>
-=======
 <div class="content-item">
 	<h1>Site Administration</h1>
 
@@ -31,4 +16,3 @@
 
 	<% end %>
 </div>
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469

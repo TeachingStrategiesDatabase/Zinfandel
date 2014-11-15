@@ -1,30 +1,9 @@
-<<<<<<< HEAD
-General
-	Administrator creates list of approved departments and subjects
+Evaluation Notes
 
+Bugs:
+	Issue with using '# of results show' when no results are being shown
 
-
-Mitch
-	Need search on multiple attributes
-
-Jingwei
-	Need search for multiple keywords
-
-Scott
-	Search page should get list of depts and subjects from administrator's list
-
-Sally
-	Number of records per page should be able to be set by the user (higher default would be good, around 20-30)
-=======
-5, 6
-Department of Computer Science
-
-7, 8
-Department of Physics
-
-5, 7
-Psychology
-
-6, 8
-French
->>>>>>> 7d80c0ea6d6fa46283329e6920986b444cdeb469
+Features:
+	Help bar/page for new users
+	Search by title could take multiple search terms
+	Search by author
