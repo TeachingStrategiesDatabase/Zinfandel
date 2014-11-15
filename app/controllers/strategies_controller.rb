@@ -18,16 +18,16 @@ class StrategiesController < ApplicationController
 		@kwd = params[:keywords]
 		@tit = params[:title]
 		@aut = params[:author]
-
-		@dep = @dep.split(',') if @dep.class == String
-		@sub = @sub.split(',') if @sub.class == String
+#keywordList = keywords.split(/(?:,|\s)+/)
+		@dep = @dep.split(/(?:,|\s)+/) if @dep.class == String
+		@sub = @sub.split(/(?:,|\s)+/) if @sub.class == String
 
 		if params[:entry_number]
 			cookies[:page_entries] = params[:entry_number]
 		end
 	
 		entries_per_page = !cookies[:page_entries].blank? ? cookies[:page_entries].to_i : PAGE_ENTRIES_DEFAULT	
-		@currentPage = Strategy.search(params[:department],params[:subject],params[:keywords],params[:title],params[:author], @page, entries_per_page)
+		@currentPage = Strategy.search(@dep,@sub,params[:keywords],params[:title],params[:author], @page, entries_per_page)
 		if @currentPage.size < entries_per_page
 			@notLastPage = false
 		else
