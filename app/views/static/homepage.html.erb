@@ -4,6 +4,8 @@
 	<h1>Search Strategies</h1><p>
 		<% if current_user %>
 			<p>...Or <%= link_to 'share a strategy of your own', :controller => 'strategies', :action =>'new' %></p>
+		<% else %>
+			<p>...Or <%= link_to 'share a strategy of your own', login_path, :class => "link" %></p>
 		<% end %>
 
 		<%= form_tag({controller:"strategies",action:"search"}, method:"get", class:"searchForm") do %>
