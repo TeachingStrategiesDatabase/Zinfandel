@@ -1,9 +1,8 @@
 <!-- Search result page - list results of search -->
 <div class="content-item">
 	<div class="row">
-	<div class="large-6 columns">
-		<%= link_to_if @page.to_i>1 , 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)} %>
-		<%= link_to_if @notLastPage , 'Next Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1)} %>
+	<div class="large-10 columns">
+		<%= render 'strategies/search_nav' %>
 	</div>
 	<div class="large-2 columns">
 		<%= form_tag({:controller => "strategies", :action => "search"}, {:method => "get"}) do %>
@@ -46,14 +45,12 @@
 	</li>
 	<% end %>
 </ul>
-
-<p></p>
-
-
-
-
-
-
-<p></p>
-<p></p>
-<%= link_to 'HomePage', root_path %>
+<div class="content-item">
+	<div class="row">
+	<div class="large-10 columns">
+		<%= render 'strategies/search_nav' %>
+	</div>
+	<div class="large-2 columns">
+		<%= link_to 'Home Page', root_path, :class => "button radius small" %>
+	</div>
+</div>
