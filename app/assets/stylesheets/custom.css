@@ -84,6 +84,7 @@ body {
 .notice {
 	margin: 2% 2.5% 0 2.5%;
 	padding: 2px 5% 2px 5%;
+	font-size: 2em;
 }
 
 .notice-success {
@@ -112,9 +113,7 @@ form select {
 
 form textarea {
 	margin: 0px 0px 1rem;
-}
-
-form .multiselect {
+	height: 130px;
 }
 
 .strategy-title {

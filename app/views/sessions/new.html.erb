@@ -1,11 +1,12 @@
 <!-- Login page - form for creating a new session -->
 
 <div class="content-item">
-	<%= render 'static/form_errors' %>
 
 	<h1>Log in to your account</h1>
 
 	<%= form_tag do %>
+	
+	<%= render 'static/form_errors' %>
 
 	<%= label_tag :email %>
 	<%= text_field_tag :email %>
