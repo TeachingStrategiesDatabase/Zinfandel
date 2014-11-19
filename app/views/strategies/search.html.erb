@@ -48,9 +48,10 @@
 
 
 <p></p>
-<%= link_to_if @page.to_i>1 , 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)} %>
 
-<%= link_to_if @notLastPage , 'Next Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1)} %>
+<%= link_to_if @page.to_i>1 , '<button type="button">Previous Page</button>'.html_safe, {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)} %>
+
+<%= link_to_if @notLastPage , '<button type="button">Next Page</button>'.html_safe, {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1)} %>
 
 <p></p>
 <%= link_to 'HomePage', root_path %>
