@@ -65,6 +65,7 @@ class StrategiesController < ApplicationController
  		if @strategy.save
  			nextModelId = last_model_id()
  			addKeywords(@strategy.id, params[:keywords])
+			flash[:success] = "Strategy created successfully!"
   			redirect_to root_path
   		else
 			@errors = @strategy.errors.full_messages
@@ -85,6 +86,7 @@ class StrategiesController < ApplicationController
         @strategy = Strategy.find(params[:id])
         
         if (@strategy.update(strategy_params) && @strategy.setKeywords(params[:keywords]) )
+			flash[:success] = "Strategy updated successfully!"
             redirect_to root_path
         else
 			@errors = @strategy.errors.full_messages
@@ -97,6 +99,7 @@ class StrategiesController < ApplicationController
         
        		@strategy = Strategy.find(params[:id])
         	if( @strategy.destroy && @strategy.setKeywords(''))
+				flash[:success] = "Strategy deleted successfully!"
 		#do nothing
 		else
 			@errors = @strategy.errors

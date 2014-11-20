@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 			if @user.save
 				@user.log_in
 				cookies[:sid] = @user.session_token
+				flash[:success] = "Account created successfully!"
 				redirect_to root_path
 			else
 				@errors = @user.errors.full_messages
@@ -81,6 +82,11 @@ class UsersController < ApplicationController
 			end
 		end
 
+		if @errors.empty?
+			flash[:success] = "Action completed successfully!" 
+		else
+			flash[:warning] = "Action completed with errors."
+		end
 		redirect_to :action => 'admin', :errors => @errors
 	end
 

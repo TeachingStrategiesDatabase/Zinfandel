@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
 					return
 
 				else
-					flash[:danger] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."
+					flash[:error] = "Something went wrong with authentication, please try again. If the problem persists, please contact the web admin."
 				end
 			else
 
