@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
 	include SessionsHelper
 
+	# Prevent CSRF for cookies other than session
+	def handle_unverified_request
+		super
+		current_user.log_out if current_user
+	end
+
 	protected
 
 	# before_filters go here, so that they are available to all controllers
