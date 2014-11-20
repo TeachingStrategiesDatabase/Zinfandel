@@ -21,6 +21,22 @@ class Strategy < ActiveRecord::Base
 		Keyword.setKeywordsByStrategy(self.id,newKeywords)
 	end
 
+	def self.hasDepartment(departmentName)
+		departmentQuery = "SELECT * from strategies where department = '" + departmentName + "';"
+		if (connection.execute(departmentQuery).length > 0)
+			return true
+		end
+		false
+	end
+
+	def self.hasSubject(subjectName)
+		subjectQuery = "SELECT * from strategies where subject = '" + subjectName + "';"
+		if (connection.execute(subjectQuery).length > 0)
+			return true
+		end
+		false
+	end
+
 	def self.search(dep, sub, kwd, ttle, aut, page, entries_per_page)
 		
 		if dep && !dep.empty?

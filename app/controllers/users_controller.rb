@@ -41,9 +41,11 @@ class UsersController < ApplicationController
 		@departments = Department.all
 		@subjects = Subject.all
 		#@users = User.all
+		@errors = params[:errors] if params[:errors]
 	end
 
 	def admin_update_depts_subjects
+		@errors = []
 		current_depts = Department.all.collect { |d| d.name }
 		current_subjects = Subject.all.collect { |s| s.name }
 
@@ -56,10 +58,30 @@ class UsersController < ApplicationController
 		# remove old values from the database
 		old_depts = current_depts.reject { |d| params[:departments].split(/,\s*/).include?(d) }
 		old_subjects = current_subjects.reject { |s| params[:subjects].split(/,\s*/).include?(s) }
-		old_depts.each { |d| Department.find_by_name(d).destroy }
-		old_subjects.each { |s| Subject.find_by_name(s).destroy }
+		old_depts.each do |d| #for each department make sure that it is not in a current strategy before deleting
+			current_department = Department.find_by_name(d)
+			d_name = current_department.name
+			if (Strategy.hasDepartment(d_name)==false)
+				current_department.destroy
+			else
+				#Write out some sort of error message
+				@errors.push("There are strategies in the database which have the " + d_name + " department.  
+					Remove these strategies before deleting " + d_name + ".")
+			end
+		end
+		old_subjects.each do |s| 
+			current_subject = Subject.find_by_name(s)
+			s_name = current_subject.name
+			if (Strategy.hasSubject(s_name)==false)
+				current_subject.destroy
+			else
+				#Write out some sort of error message
+				@errors.push("There are strategies in the database which have the " + s_name + " subject.  
+					Remove these strategies before deleting " + s_name + ".")
+			end
+		end
 
-		redirect_to admin_path
+		redirect_to :action => 'admin', :errors => @errors
 	end
 
 #=== Private methods =========================================================

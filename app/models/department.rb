@@ -11,4 +11,5 @@ class Department < ActiveRecord::Base
 	def self.insertDepartment(departmentName)
 		connection.execute("INSERT INTO departments(name) VAlUES (\'" + departmentName + "\')")
 	end
+	
 end
