@@ -17,6 +17,7 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<p><%= @AStrategy.body %></p>
+			<p>Source: <%= @AStrategy.source %></p>
 			<p><small>Keywords: <%= @AStrategy.keywords.map { |k| k.keyword }.join(', ') %></small></p>
 			<%= link_to 'Home Page', {:controller => 'static', :action =>'homepage'}, {:class => "button radius small"} %>
 		</div>
