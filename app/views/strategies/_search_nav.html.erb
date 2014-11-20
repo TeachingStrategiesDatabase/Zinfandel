@@ -1,0 +1,10 @@
+<% if @page.to_i > 1 %>
+	<%= link_to 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)}, {:class => "button radius"} %>
+<% else %>
+	<%= link_to 'Previous Page', '#', :class => "button radius disabled" %>
+<% end %>
+<% if @notLastPage %>
+	<%= link_to 'Next Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1)}, {:class => "button radius"} %>
+<% else %>
+	<%= link_to 'Next Page', '#', :class => "button radius disabled" %>
+<% end %>

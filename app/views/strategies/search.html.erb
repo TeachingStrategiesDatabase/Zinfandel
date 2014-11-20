@@ -1,14 +1,31 @@
 <!-- Search result page - list results of search -->
-
+<div class="content-item">
+	<div class="row">
+	<div class="large-10 columns">
+		<%= render 'strategies/search_nav' %>
+	</div>
+	<div class="large-2 columns">
+		<%= form_tag({:controller => "strategies", :action => "search"}, {:method => "get"}) do %>
+			<%= label_tag :entry_number, "Entries per page", :class => "hide" %>
+			<%= select_tag :entry_number, options_for_select([["10", 10], ["11", 11], ["20", 20], ["30", 30], ["40", 40], ["50", 50], ["100", 100]], cookies[:page_entries]) %>
+ 			<%= hidden_field_tag :department, @dep %>
+			<%= hidden_field_tag :subject, @sub %>
+			<%= hidden_field_tag :keywords, @kwd %>
+			<%= hidden_field_tag :title, @tit %>
+			<%= hidden_field_tag :author, @aut %>
+			<%= hidden_field_tag :page, 1 %>
+			<%= submit_tag "Change number of entries per page" %>
+		<% end %>
+	</div>
+	</div>
+</div>
 <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
 	<% @currentPage.each do |strategy| %>
 	<li>
 		<div class="content-item">
-			<% title = "Title: " %>
-			<% title += strategy.title %>
 			<div class="row">
 				<div class="large-10 columns">
-					<h1><%= link_to title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}, {:class => "strategy-title"}  %></h1>
+					<h1><%= link_to strategy.title, {:controller => "strategies" , :action => "show" ,:id => strategy.id}, {:class => "strategy-title"}  %></h1>
 					<p><small>Author: <span class="author-name"><%= strategy.user.name %></span></small></p>
 				</div>
 				<div class="large-2 columns clearfix">
@@ -28,29 +45,12 @@
 	</li>
 	<% end %>
 </ul>
-
-<p></p>
-
-
-
-<%= form_tag({:controller => "strategies", :action => "search"}, {:method => "get"}) do %>
-	<%= label_tag "Numbers of results shown"%>
-	<%= select_tag :entry_number, options_for_select([["10", 10], ["11", 11], ["20", 20], ["30", 30], ["40", 40], ["50", 50], ["100", 100]], cookies[:page_entries]) %>
- 	<%= hidden_field_tag :department, @dep %>
-	<%= hidden_field_tag :subject, @sub %>
-	<%= hidden_field_tag :keywords, @kwd %>
-	<%= hidden_field_tag :title, @tit %>
-	<%= hidden_field_tag :author, @aut %>
-	<%= hidden_field_tag :page, 1 %>
-	<%= submit_tag "Change number of entries shown" %>
-<% end %>
-
-
-
-<p></p>
-<%= link_to_if @page.to_i>1 , 'Previous Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i-1)} %>
-
-<%= link_to_if @notLastPage , 'Next Page', {:controller => "strategies" , :action => "search" , :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1)} %>
-
-<p></p>
-<%= link_to 'HomePage', root_path %>
+<div class="content-item">
+	<div class="row">
+	<div class="large-10 columns">
+		<%= render 'strategies/search_nav' %>
+	</div>
+	<div class="large-2 columns">
+		<%= link_to 'Home Page', root_path, :class => "button radius small" %>
+	</div>
+</div>

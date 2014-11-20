@@ -1,11 +1,12 @@
 <!-- Registration page - form for creating a new user -->
 
 <div class="content-item">
-	<%= render 'static/form_errors' %>
 
 	<h1>Create an Account</h1>
 
 	<%= form_for :user,url: '/users/create' do |f| %>
+
+		<%= render 'static/form_errors' %>
 
     	<%= f.label :first_name %><br>
     	<%= f.text_field :first_name, {:value => params[:first_name]} %>
