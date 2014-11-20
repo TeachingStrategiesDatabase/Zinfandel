@@ -2,6 +2,8 @@
 
 <div class="content-item">
 	<h1><%= @AStrategy.title %></h1>
+	<h6><%= @AStrategy.user.name %>
+	<%=label_tag (@AStrategy.updated_at) %> </h6>
 	<p><%= @AStrategy.body %></p>
 	<%= link_to 'HomePage', :controller => 'static', :action =>'homepage' %>
 </div>
