@@ -30,8 +30,8 @@
 				</div>
 				<div class="large-2 columns clearfix">
 					<% if current_user && (current_user.is_author?(strategy) || current_user.is_admin?) %>
-						<%= link_to "Update", :controller => 'strategies', :action =>'edit', id: strategy.id %><br />
-						<%= link_to "Destroy", strategy_delete_path(strategy), method: "delete", id: strategy.id, :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1),  data: { confirm: 'Are you sure?' } %>
+						<%= link_to "Update", {:controller => 'strategies', :action =>'edit', id: strategy.id}, {:class => "button round small"} %><br />
+						<%= link_to "Destroy", strategy_delete_path(strategy, :department=> @dep, :subject => @sub, :keywords => @kwd, :title => @tit, :author => @aut, :page => (@page.to_i+1)), :method => :delete, data: { confirm: 'Are you sure?' }, :class => "button round small alert" %>
 					<% end %>
 				</div>
 			</div>

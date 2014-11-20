@@ -100,7 +100,12 @@ class StrategiesController < ApplicationController
 		else
 			@errors = @strategy.errors
         	end
-        	redirect_to :action => "search", :department=> params[:department], :subject => params[:subject], :keywords => params[:keywords], :title => params[:title], :author => params[:author], :page => params[:page]
+
+			if params[:from_show_view]
+				redirect_to root_path
+			else
+        		redirect_to :action => "search", :department=> params[:department], :subject => params[:subject], :keywords => params[:keywords], :title => params[:title], :author => params[:author], :page => params[:page]
+			end
 		
 	end
 

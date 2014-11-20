@@ -1,9 +1,24 @@
 <!-- Specific strategy page -->
 
 <div class="content-item">
-	<h1><%= @AStrategy.title %></h1>
-	<h6><%= @AStrategy.user.name %>
-	<%=label_tag (@AStrategy.updated_at) %> </h6>
-	<p><%= @AStrategy.body %></p>
-	<%= link_to 'HomePage', :controller => 'static', :action =>'homepage' %>
+	<div class="row">
+		<div class="large-10 columns">
+			<h1><%= @AStrategy.title %></h1>
+			<h6><%= @AStrategy.user.name %>
+			<%=label_tag (@AStrategy.updated_at) %> </h6>
+		</div>
+		<div class="large-2 columns">
+			<% if current_user && (current_user.is_author?(@AStrategy) || current_user.is_admin?) %>
+				<%= link_to "Update", {:controller => 'strategies', :action =>'edit', id: @AStrategy.id}, {:class => "button round small"} %><br />
+				<%= link_to "Destroy", strategy_delete_path(@AStrategy, :from_show_view => true), :method => :delete, data: { confirm: 'Are you sure?' }, :class => "button round small alert" %>
+			<% end %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-12 columns">
+			<p><%= @AStrategy.body %></p>
+			<p><small>Keywords: <%= @AStrategy.keywords.map { |k| k.keyword }.join(', ') %></small></p>
+			<%= link_to 'Home Page', {:controller => 'static', :action =>'homepage'}, {:class => "button radius small"} %>
+		</div>
+	</div>
 </div>
