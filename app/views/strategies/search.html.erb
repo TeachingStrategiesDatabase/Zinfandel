@@ -19,6 +19,17 @@
 	</div>
 	</div>
 </div>
+<% if @page=='1' && @currentPage.size==0  %>
+	<div class="content-item">
+		<h1>No strategies were found</h1>
+		<p>Suggestions:</p>
+		<ul>
+			<li>Make sure all words are spelled correctly.</li>
+			<li>Try different keywords.</li>
+			<li>Try fewer keywords.</li>
+		</ul>
+	</div>
+<% else %>
 <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
 	<% @currentPage.each do |strategy| %>
 	<li>
@@ -45,6 +56,7 @@
 	</li>
 	<% end %>
 </ul>
+<% end %>
 <div class="content-item">
 	<div class="row">
 	<div class="large-10 columns">
