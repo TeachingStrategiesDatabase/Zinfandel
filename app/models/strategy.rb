@@ -22,19 +22,11 @@ class Strategy < ActiveRecord::Base
 	end
 
 	def self.hasDepartment(departmentName)
-		departmentQuery = "SELECT * from strategies where department = '" + departmentName + "';"
-		if (connection.execute(departmentQuery).length > 0)
-			return true
-		end
-		false
+		Strategy.where(:department => departmentName).length > 0
 	end
 
 	def self.hasSubject(subjectName)
-		subjectQuery = "SELECT * from strategies where subject = '" + subjectName + "';"
-		if (connection.execute(subjectQuery).length > 0)
-			return true
-		end
-		false
+		Strategy.where(:subject => subjectName).length > 0
 	end
 
 	def self.search(dep, sub, kwd, ttle, aut, page, entries_per_page)
